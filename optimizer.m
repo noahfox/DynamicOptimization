@@ -34,7 +34,7 @@ x0 = zeros(1,29);
 % x0 = rand(1,29);
 
 % OPTIMIZER OPTIONS
-options = optimoptions(@fmincon,'Display','iter','Algorithm','sqp','MaxIter',1000,'MaxFunEvals',10000);
+options = optimoptions(@fmincon,'Display','iter','Algorithm','sqp','MaxIter',1000,'MaxFunEvals',10000,'TolCon',10^-3);
 
 % OPTIMIZE
 [x, fval] = fmincon(@opti_criterion,x0,[],[],[],[],lb,ub,@constraint_fun,options,robot);

@@ -7,6 +7,5 @@ end
 [ Robut_New, COM, ~ ] = drc_forward_kinematics( Robut_Old );
 COM_X = COM(1);
 COM_Y = COM(2);
-
 end
 

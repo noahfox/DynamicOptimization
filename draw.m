@@ -1,4 +1,4 @@
-function result = draw( tree )
+function result = draw( tree, p_d )
 % draw( tree ), return value is meaningless
 
 for i = 2:29
@@ -13,6 +13,7 @@ for i = 2:29
  hold on
 end
 axis( [-1 1 -1 1 0 2 ] );
+plot3(p_d(1),p_d(2),p_d(3),'Marker','*','MarkerSize',3,'MarkerEdgeColor','r');
 hold off
 
 

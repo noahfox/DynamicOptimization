@@ -1,7 +1,7 @@
-function [ Robut_New,COM_X,COM_Y ] = Robut_Maker( Robut_Old,P)
+function [ Robut_New,COM_X,COM_Y ] = Robut_Maker(Robut_Old,P)
 
 for i = 1:1:29
-    Robut_Old.joint(i).angle = P(i);
+    Robut_Old.j(i).angle = P(i);
 end
 
 [ Robut_New, COM, ~ ] = drc_forward_kinematics( Robut_Old );

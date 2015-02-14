@@ -2465,6 +2465,27 @@ function f=fcornersphere(x)
   f = sum(x(idx).^2);
   idx = x > 0;
   f = f + 2^2*sum(w(idx).*x(idx).^2);
+
+function score = opti_criterion(joint_angles)
+    global p_d COM_D joint_angle_goals robot
+    
+    
+    [ Robut_New,COM_X,COM_Y ] = Robut_Maker( robot,joint_angles);
+    
+    
+    % [robot,robot_com,~] = drc_forward_kinematics(new_robot);
+    
+    % UPDATE GRAPHICS
+    figure(1)
+    draw(Robut_New,p_d);
+    
+    p = Robut_New.j(29).position_w;
+    w = [1; 1; 1; 1; 1; 1;];
+    score = w(1)*(p - p_d)*(p - p_d)' %+ w(2)*(COM_X-COM_D(1))^2+ w(2)*(COM_Y-COM_D(2))^2 + w(3)*(joint_angles' - joint_angle_goals)*(joint_angles' - joint_angle_goals)';
+    
+    % w(1)*(p - p_d)*(p - p_d)' + 
+
+  
   
 function f=fsectorsphere(x, scal)
 %
@@ -3015,7 +3036,7 @@ function f=frand(x)
 % SOME MORE COMMENTS: 
 % The adaptation of the covariance matrix (e.g. by the CMA) is
 % equivalent to a general linear transformation of the problem
-% coding. Nevertheless every problem specific knowlegde about the best
+% coding. Nevertheless every problem specific knowlegde about the best 
 % linear transformation should be exploited before starting the
 % search. That is, an appropriate a priori transformation should be
 % applied to the problem. This also makes the identity matrix as

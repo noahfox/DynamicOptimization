@@ -21,8 +21,8 @@ function xmin=purecmaes
 
   % --------------------  Initialization --------------------------------  
   % User defined input parameters (need to be edited)
-  strfitnessfct = 'frosenbrock';  % name of objective/fitness function
-  N = 11;               % number of objective variables/problem dimension
+  strfitnessfct = 'fssphere';  % name of objective/fitness function
+  N = 10;               % number of objective variables/problem dimension
   xmean = rand(N,1);    % objective variables initial point
   sigma = 0.5;          % coordinate wise standard deviation (step size)
   stopfitness = 1e-10;  % stop if fitness < stopfitness (minimization)

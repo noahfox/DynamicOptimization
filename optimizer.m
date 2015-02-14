@@ -1,4 +1,4 @@
-clear all; close all; clc
+function [x, fval, h] = optimizer(x0,desired_pos)
 % LOAD ROBOT
 drc4
 
@@ -10,8 +10,8 @@ robot.l(1).orientation = q_to_R( [ 0 0 0 1 ] );
 global w con_opts h p_d joint_angle_goals COM_D foot_pos
 
 % DESIRED RIGHT WRIST POSITION & ORIENTATION
-p_d = [.4 -0.4 1.2];
-% o_d = [];
+% p_d = [.4 -0.4 1.2];
+p_d = desired_pos;
 
 % DRAW ROBOT
 h = figure();
@@ -35,7 +35,7 @@ con_opts = [1];
 w = [10; 1; 1; 1; 1; 1;];
 
 % INITIAL GUESS
-x0 = zeros(1,29);
+% x0 = zeros(1,29);
 % x0 = rand(1,29);
 
 % OPTIMIZER OPTIONS

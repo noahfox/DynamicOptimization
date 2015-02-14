@@ -1,4 +1,4 @@
-function [x, fval, h] = optimizer(x0,desired_pos)
+function [x, fval, exitflag, h] = optimizer(x0,desired_pos,opts)
 % LOAD ROBOT
 drc4
 
@@ -30,7 +30,8 @@ joint_angle_goals = (lb+ub)./2;
 
 COM_D = [0 0];
 
-con_opts = [1];
+% con_opts = [1];
+con_opts = opts;
 
 w = [10; 1; 1; 1; 1; 1;];
 
@@ -42,4 +43,4 @@ w = [10; 1; 1; 1; 1; 1;];
 options = optimoptions(@fmincon,'Display','iter','Algorithm','sqp','MaxIter',1000,'MaxFunEvals',10000,'TolCon',10^-5);
 
 % OPTIMIZE
-[x, fval] = fmincon(@opti_criterion,x0,[],[],[],[],lb,ub,@constraint_fun,options,robot);
+[x, fval, exitflag] = fmincon(@opti_criterion,x0,[],[],[],[],lb,ub,@constraint_fun,options,robot);

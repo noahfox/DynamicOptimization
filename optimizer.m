@@ -13,9 +13,8 @@ global h w con_opts p_d o_d l_foot_ori r_foot_ori joint_angle_goals COM_D foot_p
 p_d = desired_pos;
 o_d = desired_orientation;
 
-% DRAW ROBOT
+% INITIALIZE FIGURE
 h = figure();
-draw(robot,p_d);
 
 % JOINT LIMITS
 for i = 1:1:29

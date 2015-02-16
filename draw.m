@@ -1,4 +1,4 @@
-function result = draw( tree, p_d,COM_X,COM_Y )
+function result = draw(tree,p_d,COM_X,COM_Y )
 % draw( tree ), return value is meaningless
 
 for i = 2:29

@@ -15,6 +15,10 @@ end
 axis( [-1 1 -1 1 0 2 ] );
 plot3(p_d(1),p_d(2),p_d(3),'Marker','*','MarkerSize',3,'MarkerEdgeColor','r');
 plot3(COM_X,COM_Y,1,'Marker','o','MarkerSize',3,'MarkerEdgeColor','k');
+x = [.302/2,.302/2,-.302/2,-.302/2,.302/2];
+y = [.262/2,-.262/2,-.262/2,.262/2,.262/2];
+z = [1 1 1 1 1];
+plot3(x,y,z,'LineWidth',3,'Color','m')
 hold off
 
 

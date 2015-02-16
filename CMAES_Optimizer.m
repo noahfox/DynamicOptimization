@@ -1,4 +1,12 @@
+clf
+clc
+clear all
+close all
+
 % CMAES Optimizer
+
+% INITIALIZE GLOBAL VARIABLES
+global p_d joint_angle_goals COM_D foot_pos robot
 
 % LOAD ROBOT
 drc4
@@ -7,25 +15,23 @@ drc4
 robot.j(1).position_w = [ 0 0 0.92712 ];
 robot.l(1).orientation = q_to_R( [ 0 0 0 1 ] );
 
-
-
-
-% INITIALIZE GLOBAL VARIABLES
-global p_d joint_angle_goals COM_D foot_pos robot
-
 % DESIRED RIGHT WRIST POSITION & ORIENTATION
 p_d = [0.5 0.3 1];
 % o_d = [];
-
+% for i = 1:1:29
+%     xmean(i) = robot.j(i).angle;
+% end
+% xmean
 % DRAW ROBOT
-draw(robot,p_d);
+% figure(3)
+% [ robot,COM_X,COM_Y ] = Robut_Maker( robot,xmean);
+% draw(robot,p_d,COM_X,COM_Y);
 
 % SET UP CONSTRAINTS
-for i = 1:1:29
-    lb(i) = robot.j(i).angle_limits(1);
-    ub(i) = robot.j(i).angle_limits(2);
+for i = 2:1:29
+    lb(i-1) = robot.j(i).angle_limits(1)-.01;
+    ub(i-1) = robot.j(i).angle_limits(2)+.01;
 end
-
 foot_pos = [robot.j(10).position_w;
             robot.j(16).position_w];
         
@@ -34,13 +40,20 @@ joint_angle_goals = (lb+ub)./2;
 COM_D = [0 0];
 
 % Initial guess and search size
-x0 = zeros(1,29);
-sigma = .03;
-
+x0 = zeros(1,28);
+sigma = .5;
 
 opts = cmaes;
 opts.StopFitness = 1e-5;
-
-
+opts.LBounds = lb';
+opts.UBounds = ub';
+opts.CMA.active = 2;
 % Run the optimizer
-[XMIN,FMIN,COUNTEVAL,STOPFLAG,OUT,BESTEVER] = cmaes('opti_criterion',x0,sigma,opts)
+w = [10; 1000; 1; 1; 1; 1;];
+[XMIN,FMIN,COUNTEVAL,STOPFLAG,OUT,BESTEVER] = cmaes('opti_criterion',x0,sigma,opts,w)
+
+% % % sigma = .5;
+% % % stopfitness = 1e-5;
+% % % xmean = rand(1,29);
+% % % 
+% % % % xmin = purecmaes('opti_criterion',29,zeros(29,1),sigma,stopfitness)

@@ -1,11 +1,12 @@
 function [score] = opti_criterion(joint_angles,robot)
 global h w p_d o_d COM_D joint_angle_goals
+global 
 
 [ Robut_New,COM_X,COM_Y ] = Robut_Maker(robot,joint_angles);
 
 % UPDATE GRAPHICS
 figure(h)
-draw(Robut_New,p_d,COM_X,COM_Y);
+draw(Robut_New,p_d);
 
 p = Robut_New.j(29).position_w;
 o = Robut_New.l(29).orientation;

@@ -1,15 +1,15 @@
 clear all; close all; clc
 
 % OPTIMIZATION CONDITIONS
-p_d = [rand(1)/2 + 0.5, rand(1)/2, abs(rand(1))/2 + 1];
+p_d = [rand(1)/2 + 0.5, rand(1)/2, abs(rand(1))*2];
 % p_d = [.5 0 .7]; % DESIRED POSITION
 o_d = q_to_R([1 0 .7 0]); % DESIRED ORIENTATION
 
-N = 20; % NUMBER OF TRIALS
+N = 5; % NUMBER OF TRIALS
 e = 0.1; % REQUIRED DIFFERENCE
 
 % SCORE FUNCTION WEIGHTS
-w = [10; 6; 4; 2];
+w = [8; 10; 4; 2];
 
 % RUN OPTIMIZER
 for i = 1:1:N

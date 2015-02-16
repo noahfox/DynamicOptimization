@@ -2379,7 +2379,7 @@ function score = opti_criterion(joint_angles,w)
 %     pause
     p = Robut_New.j(29).position_w;
 %     w = [10; 1000; 1; 1; 1; 1;];
-    score = w(1)*(p - p_d)*(p - p_d)' + w(2) * eq_violations * eq_violations' + w(3)*(COM_X-COM_D(1))^2 + w(3)*(COM_Y-COM_D(2))^2 + w(4)*(angles' - joint_angle_goals)*(angles' - joint_angle_goals)';
+    score = w(1)* sqrt((p - p_d)*(p - p_d)') + w(2) * sqrt(eq_violations * eq_violations') + w(3)*sqrt((abs(COM_X)-COM_D(1))^2) + w(3)*sqrt((abs(COM_Y)-COM_D(2))^2) + w(4)*sqrt((angles' - joint_angle_goals)*(angles' - joint_angle_goals)');
     
     % w(1)*(p - p_d)*(p - p_d)' + 
 

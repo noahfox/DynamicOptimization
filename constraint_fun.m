@@ -24,6 +24,6 @@ if con_opts(1) ~= 0
 end
 
 % STAY UP
-ineq_violations = [COM_X-(0.302/2), COM_Y-(0.262/2)];
+ineq_violations = [abs(COM_X)-(0.302/2), abs(COM_Y)-(0.262/2)];
 
 end

@@ -39,7 +39,7 @@ con_opts = opts;
 w = weights;
 
 % OPTIMIZER OPTIONS
-options = optimoptions(@fmincon,'Display','iter','Algorithm','sqp','MaxIter',1000,'MaxFunEvals',10000,'TolCon',10^-4);
+options = optimoptions(@fmincon,'Display','iter','Algorithm','sqp','MaxIter',1000,'MaxFunEvals',10000,'TolCon',10^-5);
 
 % OPTIMIZE
 [x, fval, exitflag] = fmincon(@opti_criterion,x0,[],[],[],[],lb,ub,@constraint_fun,options,robot);

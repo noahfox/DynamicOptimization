@@ -10,8 +10,9 @@ o_d = [1 0 0; % DESIRED ORIENTATION
 N = 1; % NUMBER OF TRIALS
 
 % SCORE FUNCTION WEIGHTS
-w = [10; 1; 1; 1; 1; 2];
+w = [10; 2; 5; 2];
 
+% RUN OPTIMIZER
 for i = 1:1:N
     % SET INITIAL CONDITIONS
     if mod(i,100) == 0

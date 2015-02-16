@@ -141,7 +141,7 @@ opts.Restarts = 2;
 opts.StopOnStagnation = 'on';
 opts.TolX = 1e-4;
 % Run the optimizer
-w = [100; 500; 10; 1; 1; 1;];
+w = [100; 1000; 10; 1; 1; 1;];
 [XMIN,FMIN,COUNTEVAL,STOPFLAG,OUT,BESTEVER] = cmaes('opti_criterion',x0,sigma,opts,w)
 
 % % % sigma = .5;

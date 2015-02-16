@@ -2383,6 +2383,45 @@ function score = opti_criterion(joint_angles,w)
     
     % w(1)*(p - p_d)*(p - p_d)' + 
 
+function score = opti_criterion_simp(joint_angles,w)
+    global p_d COM_D joint_angle_goals robot foot_pos
+    
+    angles = joint_angles;
+    
+    joint_angles = vertcat(0,joint_angles(1:28));
+    
+%     Robut_New.j(11).position_w(1) = foot_pos(1,1);
+%     Robut_New.j(11).position_w(2) = foot_pos(1,2);
+%     Robut_New.j(11).position_w(3) = foot_pos(1,3);
+%     Robut_New.j(17).position_w(1) = foot_pos(2,1);
+%     Robut_New.j(17).position_w(2) = foot_pos(2,2);
+%     Robut_New.j(17).position_w(3) = foot_pos(2,3);
+%     
+    [ Robut_New,COM_X,COM_Y ] = Robut_Maker( robot,joint_angles);
+    
+    
+    
+    eq_violations(1) = foot_pos(1,1) - Robut_New.j(11).position_w(1);
+    eq_violations(2) = foot_pos(1,2) - Robut_New.j(11).position_w(2);
+    eq_violations(3) = foot_pos(1,3) - Robut_New.j(11).position_w(3);
+    eq_violations(4) = foot_pos(2,1) - Robut_New.j(17).position_w(1);
+    eq_violations(5) = foot_pos(2,2) - Robut_New.j(17).position_w(2);
+    eq_violations(6) = foot_pos(2,3) - Robut_New.j(17).position_w(3);
+    
+    
+    
+    %ineq_violations = [COM_X-(0.302/2), COM_Y-(0.262/2)]
+    
+    % UPDATE GRAPHICS
+    figure(3)
+    draw(Robut_New,p_d,COM_X,COM_Y);
+%     pause
+    p = Robut_New.j(29).position_w;
+%     w = [10; 1000; 1; 1; 1; 1;];
+    score = w(1)* ((p - p_d)*(p - p_d)') + w(2) * (eq_violations * eq_violations') + w(3)*((abs(COM_X)-COM_D(1))^2) + w(3)*((abs(COM_Y)-COM_D(2))^2) + w(4)*((angles' - joint_angle_goals)*(angles' - joint_angle_goals)');
+    
+    % w(1)*(p - p_d)*(p - p_d)' +     
+    
 function f=fjens1(x)
 %
 % use population size about 2*N

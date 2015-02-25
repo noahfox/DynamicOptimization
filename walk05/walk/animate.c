@@ -263,7 +263,7 @@ int main (int argc, char **argv)
   fn.command = &command; 
   fn.stop = 0; 
 #ifdef WIN32
-  fn.path_to_textures = WALK_BASE_PATH "/useful/drawstuff-windows/textures";
+  fn.path_to_textures = "C:/Users/ntfox.ANDREW/Desktop/DynamicOptimization/walk05/useful/drawstuff-windows/textures";
 #else
   fn.path_to_textures = WALK_BASE_PATH "/useful/drawstuff-linux/textures";
 #endif

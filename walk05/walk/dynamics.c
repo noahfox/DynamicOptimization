@@ -42,7 +42,7 @@ ankle +
 
 #define FEET_TOGETHER (1e-3) // Feet too close together to measure tilt
 
-/*
+
 #ifdef WIN32
 int isnan( double x )
 { return 0; }
@@ -50,7 +50,7 @@ int isnan( double x )
 int isinf( double x )
 { return 0; }
 #endif
-*/
+
 /************************************************************************/
 /* GLOBAL VARIABLES */
 

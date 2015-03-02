@@ -25,7 +25,7 @@ int main(int argn, char **args) {
   int i; 
 
   /* Initialize everything into the struct evo, 0 means default */
-  arFunvals = cmaes_init(&evo, 0, NULL, NULL, 0, 0, "cmaes_initials.par");
+  arFunvals = cmaes_init(&evo, 0, NULL, NULL, 0, 0, "../cmaes_initials.par");
   printf("%s\n", cmaes_SayHello(&evo));
   cmaes_ReadSignals(&evo, "cmaes_signals.par");  /* write header and initial values */
 

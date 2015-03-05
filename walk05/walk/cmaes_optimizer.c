@@ -6,8 +6,8 @@
 #include <stddef.h> /* NULL */
 #include <stdlib.h> /* free() */
 #include <float.h> /* DBL_MAX */
-#include "../c-cmaes-master/src/cmaes_interface.h"
-#include "../c-cmaes-master/src/boundary_transformation.h"
+#include "cmaes_interface.h"
+#include "boundary_transformation.h"
 #include "main.h"
 #include "main2.h"
 
@@ -26,7 +26,27 @@ double fitfun(double const *x, unsigned long N) {
 }
 */
 
-double get_score 
+extern SIM sim;
+
+void init_default_parameters(SIM *sim);
+
+float get_param_vector(double const *x,)
+{
+  parameters_to_vector(SIM *s, float *x);
+  return *x;
+}
+
+
+double fitfun(double const *x, unsigned long N) {
+  return get_score( SIM *sim );
+}
+
+
+
+
+
+
+
 
 int is_feasible(double const *x, unsigned long N) {
 	N = (long) x[0]; /* only to prevent compiler warning */
@@ -47,7 +67,7 @@ int main(int argn, char **args) {
   /* initialize boundaries, be sure that initialSigma is smaller than upper minus lower bound */
   cmaes_boundary_transformation_init(&boundaries, lowerBounds, upperBounds, nb_bounds);
   /* Initialize everything into the struct evo, 0 means default */
-  arFunvals = cmaes_init(&evo, 0, NULL, NULL, 0, 0, "cmaes_initials.par");
+  arFunvals = cmaes_init(&evo, 0, NULL, NULL, 0, 0, "initial_conds.par");
   dimension = (unsigned long)cmaes_Get(&evo, "dimension");
 
   printf("%s\n", cmaes_SayHello(&evo));
@@ -76,7 +96,7 @@ int main(int argn, char **args) {
       cmaes_UpdateDistribution(&evo, arFunvals);  /* assumes that pop[i] has not been modified */
 
       /* read instructions for printing output or changing termination conditions */ 
-      cmaes_ReadSignals(&evo, "cmaes_signals.par");
+      cmaes_ReadSignals(&evo, "optim_signals.par");
       fflush(stdout); /* useful in MinGW */
     }
   printf("Stop:\n%s\n",  cmaes_TestForTermination(&evo)); /* print termination reason */

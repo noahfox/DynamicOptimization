@@ -11,7 +11,7 @@
 #include "../useful/trajectory/trajectory.h"
 #include "main.h"
 #include "main2.h"
-#include "../c-cmaes-master/src/cmaes_interface.h"
+#include "cmaes_interface.h"
 
 /*****************************************************************************/
 

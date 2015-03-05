@@ -13,7 +13,6 @@
 #include "main2.h"
 #include "../c-cmaes-master/src/cmaes_interface.h"
 
-
 /*****************************************************************************/
 
 /* Controller states */

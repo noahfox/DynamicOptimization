@@ -1,5 +1,5 @@
 
-swing_time    0.89 opt end
+swing_time .89 opt end
 thrust1  -0.047 opt end
 swing_hip_target    0.33 opt end
 swing_hv1    -0.37 opt end

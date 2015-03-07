@@ -2437,11 +2437,15 @@ function f=fjens1(x)
   end
   
 function score = scoreme(x)
-    x
     write_params(x);
     [~,cmdout] = system('simulate p0');
     [cost,crash ] = outputreader( cmdout );
-    score = cost+crash;   
+    score = cost+crash^10;
+    if score < 1000
+        line = '---------------------------------------------------------------------------\n';
+        write_ws = sprintf([line,'Score: %12.f\n',line],score);
+        fprintf(write_ws);
+    end
 
   
 function f=fsphere(x)

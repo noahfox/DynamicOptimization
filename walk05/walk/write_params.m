@@ -1,4 +1,4 @@
-function write_params(params,varargin)
+function write_params(params)
 
 % ----------------------------------------------------------------------- %
 % PARAMETER LIST

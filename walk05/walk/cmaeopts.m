@@ -31,7 +31,7 @@ sigma = .01;
 
 opts = cmaes;
 opts.MaxFunEvals  = 50000;
-opts.StopFitness = 500;
+opts.StopFitness = 300;
 opts.CMA.active = 1; %2
 OPTS.Noise.on = 0; %0
 opts.Restarts = 0;
@@ -40,7 +40,7 @@ opts.DiagonalOnly = 0; % might make it faster
 
 global display_val
 
-display_val = 6000;
+display_val = 400;
 
 % Run the optimizer
 [XMIN,FMIN,COUNTEVAL,STOPFLAG,OUT,BESTEVER] = cmaes('scoreme',x0,sigma,opts);

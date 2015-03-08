@@ -10,36 +10,10 @@ format short
 %               -0.38, -0.046, -0.29, -0.36, -0.12];
 
 % new starting point
-x0 = [0.88438, 0.00078096, 0.25306, -0.36528, -0.083207, -0.43315,...
-      0.25166, 0.25874, -0.07589, 0.10241, -0.12381, -0.18344,...
-     -0.027051, 0.27063, 0.093561, 0.41515, -0.37504, -0.028009,...
-     -0.27768, -0.39143, -0.1134];
- 
- 
- 
-swing_time 0.87484 opt end
-thrust1 0.0029926 opt end
-swing_hip_target 0.24857 opt end
-swing_hv1 -0.34315 opt end
-swing_ha1 -0.076318 opt end
-swing_knee1 -0.43376 opt end
-swing_kv1 0.25044 opt end
-swing_ka1 0.26421 opt end
-swing_knee_target -0.07468 opt end
-swing_kv2 0.095222 opt end
-swing_ka2 -0.11934 opt end
-stance_hip_target -0.19511 opt end
-stance_hv1 -0.027485 opt end
-stance_ha1 0.2729 opt end
-pitch_d 0.08126 opt end
-stance_kv1 0.41064 opt end
-stance_ka1 -0.36543 opt end
-stance_knee_target -0.025123 opt end
-stance_kv2 -0.2804 opt end
-stance_ka2 -0.38862 opt end
-stance_ankle_torque -0.1108 opt end
-
-
+x0 = [0.87484, 0.0029926, 0.24857, -0.34315, -0.076318,...
+	 -0.43376, 0.25044, 0.26421, -0.07468, 0.095222,...
+	 -0.11934, -0.19511, -0.027485, 0.2729, 0.08126,...
+	  0.41064, -0.36543, -0.025123, -0.2804, -0.38862, -0.1108];
 
 sigma = .005;
 
@@ -47,10 +21,10 @@ sigma = .005;
 
 opts = cmaes;
 opts.MaxFunEvals  = 50000;
-opts.StopFitness = 100;
+opts.StopFitness = 500;
 opts.CMA.active = 1; %2
 OPTS.Noise.on = 0; %0
-opts.Restarts = 3;
+opts.Restarts = 0;
 opts.TolX = 1e-4;
 opts.DiagonalOnly = 1; % might make it faster
 

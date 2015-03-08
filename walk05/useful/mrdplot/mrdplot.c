@@ -241,7 +241,7 @@ generate_file_name()
       fclose( stream );
     }
   
-  sprintf( generated_file_name, "d%05d", file_number );
+  sprintf( generated_file_name, "simdat%05d", file_number );
 
   file_number++;
 

@@ -1,3 +1,1 @@
-%  columns="iteration, evaluation, sigma, axis ratio, bestever, best, median, worst fitness function value, further objective values of best" (startseed=208371, 2015/03/7 21:10:27.71)
-1 14 4.645246e-03 1.071681e+00  5.894160000000000500e+02  5.894160000000000500e+02  2.535393012826027600e+30  1.457158155720848800e+32
-2 27 4.408986e-03 1.149425e+00  5.894160000000000500e+02  5.961109999999999900e+02  4.676965911204262400e+30  2.409722283781139800e+32
+%  columns="iteration, evaluation, sigma, axis ratio, bestever, best, median, worst fitness function value, further objective values of best" (startseed=212378, 2015/03/7 21:47:30.78)

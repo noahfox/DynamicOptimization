@@ -1,4 +1,4 @@
-function write_params(params)
+function write_params(params,correction)
 
 % ----------------------------------------------------------------------- %
 % PARAMETER LIST
@@ -20,6 +20,13 @@ fprintf(p_file, '\n'); % OPEN FILE
 
 % WRITE CONTENTS
 for i = 1:1:length(params)
+     if correction == 1
+        if any(sign == i)
+            params(i) = -abs(params(i));
+        else
+            params(i) = abs(params(i));
+        end
+     end
     write_line = [param_names{i},' ',num2str(params(i)),' opt end\n'];
     fprintf(p_file,write_line);
 end

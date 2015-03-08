@@ -2437,7 +2437,7 @@ function f=fjens1(x)
   end
   
 function score = scoreme(x)
-    write_params(x);
+    write_params(x,1);
     [~,cmdout] = system('simulate p0');
     [cost,crash ] = outputreader( cmdout );
     score = cost+crash^10;

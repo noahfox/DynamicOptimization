@@ -212,7 +212,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cmaes_optimizer.c" />
     <ClCompile Include="controller.c" />
     <ClCompile Include="data.c" />
     <ClCompile Include="parameters.c" />

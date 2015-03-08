@@ -2445,7 +2445,7 @@ function score = scoreme(x)
         line = '---------------------------------------------------------------------------\n';
         write_ws = sprintf([line,'Score: %12.f\n',line],score);
         fprintf(write_ws);
-        system('simulate_write p0'); % write simulation to data file
+        [~,~] = system('simulate_write p0'); % write simulation to data file
     end
 
   

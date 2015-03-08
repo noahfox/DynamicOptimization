@@ -19,6 +19,8 @@ p_file = fopen('p0','w');
 fprintf(p_file, '\n'); % OPEN FILE
 
 % WRITE CONTENTS
+sign = [2 4 5 6 9 11 12 13 17 18 19 20 21];
+
 for i = 1:1:length(params)
      if correction == 1
         if any(sign == i)

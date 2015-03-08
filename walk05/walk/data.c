@@ -455,7 +455,7 @@ int write_the_mrdplot_file( SIM *s )
   d->names = names;
   d->units = units;
 
-  write_mrdplot_file( d );
+  //write_mrdplot_file( d );
 
   // write_matlab_file( "dd" );
 

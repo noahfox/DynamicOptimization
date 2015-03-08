@@ -58,7 +58,7 @@ main( int argc, char **argv )
       integrate_one_time_step( &sim );
     }
 
-  //write_the_mrdplot_file( &sim );
+  write_the_mrdplot_file( &sim );
   get_score( &sim );
 }
 

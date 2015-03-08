@@ -2447,7 +2447,7 @@ function score = scoreme(x)
         fprintf(write_ws);
         [~,~] = system('simulate_write p0'); % write simulation to data file
     end
-    cleanup_mess(200); % starts deleting files after 200 have accumulated
+    %cleanup_mess(200); % starts deleting files after 200 have accumulated
 
   
 function f=fsphere(x)

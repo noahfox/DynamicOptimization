@@ -1,9 +1,10 @@
-﻿Build started 2/24/2015 9:32:41 PM.
+﻿Build started 3/7/2015 11:07:16 PM.
      1>Project "C:\DynamicOptimization\walk05\walk\animate.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "obj/DebugDLL\animate.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"../useful/drawstuff-windows" /ZI /nologo /W3 /WX- /Od /Oy- /D _CRT_SECURE_NO_DEPRECATE /D WIN32 /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj/DebugDLL\\" /Fd"obj/DebugDLL\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt animate.c ..\useful\mrdplot\mrdplot.c parameters.c
+         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"../useful/drawstuff-windows" /ZI /nologo /W3 /WX- /Od /Oy- /D _CRT_SECURE_NO_DEPRECATE /D WIN32 /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj/DebugDLL\\" /Fd"obj/DebugDLL\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\useful\mrdplot\mrdplot.c parameters.c
          parameters.c
      1>c:\dynamicoptimization\walk05\walk\parameters.c(307): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(238) : see declaration of 'strdup'
@@ -19,12 +20,9 @@
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(238) : see declaration of 'strdup'
      1>c:\dynamicoptimization\walk05\useful\mrdplot\mrdplot.c(270): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(238) : see declaration of 'strdup'
-         animate.c
-     1>c:\dynamicoptimization\walk05\walk\animate.c(226): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(238) : see declaration of 'strdup'
          Generating Code...
        ManifestResourceCompile:
-         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"obj/DebugDLL\animate.exe.embed.manifest.res" obj/DebugDLL\animate_manifest.rc 
+         All outputs are up-to-date.
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\animate.exe" /INCREMENTAL /NOLOGO /LIBPATH:../lib/DebugDLL ../lib/DebugDLL/drawstuff.lib user32.lib winmm.lib gdi32.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"obj/DebugDLL\animate.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\animate.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE:NO /IMPLIB:".\animate.lib" /MACHINE:X86 obj/DebugDLL\animate.exe.embed.manifest.res
          obj/DebugDLL\animate.obj
@@ -43,4 +41,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.88
+Time Elapsed 00:00:00.79

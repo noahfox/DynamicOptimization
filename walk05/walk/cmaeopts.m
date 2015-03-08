@@ -26,7 +26,7 @@ opts.CMA.active = 1; %2
 OPTS.Noise.on = 0; %0
 opts.Restarts = 0;
 opts.TolX = 1e-4;
-opts.DiagonalOnly = 1; % might make it faster
+opts.DiagonalOnly = 0; % might make it faster
 
 % Run the optimizer
 [XMIN,FMIN,COUNTEVAL,STOPFLAG,OUT,BESTEVER] = cmaes('scoreme',x0,sigma,opts);

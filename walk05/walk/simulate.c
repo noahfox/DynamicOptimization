@@ -44,8 +44,9 @@ main( int argc, char **argv )
 
   for( i = 0; sim.time < sim.duration; i++ )
     {
-      if ( (i % 1000) == 0 )
+      if ( (i % 100) == 0 )
         {
+          sim.torso_perturbation = 10;
 	  /*
           printf( "%g: %g %g\n", sim.time,
 		  sim.foot[LEFT][XX], sim.foot[LEFT][ZZ] );

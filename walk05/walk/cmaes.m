@@ -2437,7 +2437,7 @@ function f=fjens1(x)
   end
   
 function score = scoreme(x)
-    global display_val
+    global display_val file_lim
     write_params(x,1);
     [~,cmdout] = system('simulate p0');
     [cost,crash ] = outputreader( cmdout );
@@ -2448,7 +2448,7 @@ function score = scoreme(x)
         fprintf(write_ws);
         [~,~] = system('simulate_write p0'); % write simulation to data file
     end
-    cleanup_mess(200); % starts deleting files after 200 have accumulated
+    cleanup_mess(file_lim); % starts deleting files after 200 have accumulated
 
   
 function f=fsphere(x)

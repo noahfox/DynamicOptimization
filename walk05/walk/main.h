@@ -361,6 +361,7 @@ typedef struct {
 
   /* Perturbations */
   double torso_perturbation;
+  double perturbation_direction[20] // Added to allow perturbations in random direction
 
   /* debugging message flags */
   int controller_print;

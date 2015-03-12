@@ -604,6 +604,12 @@ void b1guforce( double t, double *q, double *u )
 			sim.foot_offset, BODY_R_CALF, sim.ground_force[RIGHT] );
 
   // Apply horizontal perturbation to torso
+  double p_force;
+  if ( t % 4 == 0)
+  {
+    
+  }
+
   force[0] = sim.torso_perturbation;
   force[1] = 0.0;
   force[2] = 0.0;

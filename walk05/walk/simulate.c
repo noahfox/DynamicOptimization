@@ -25,6 +25,7 @@ main( int argc, char **argv )
   init_default_parameters( &sim );
   sim.rand_scale = 0;
   sim.controller_print = 1;
+  sim.torso_perturbation = 10;
 
   /* Parameter file argument? */
   if ( argc > 1 )
@@ -44,9 +45,8 @@ main( int argc, char **argv )
 
   for( i = 0; sim.time < sim.duration; i++ )
     {
-      if ( (i % 100) == 0 )
+      if ( (i % 1000) == 0 )
         {
-          sim.torso_perturbation = 10;
 	  /*
           printf( "%g: %g %g\n", sim.time,
 		  sim.foot[LEFT][XX], sim.foot[LEFT][ZZ] );

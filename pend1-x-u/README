@@ -1,0 +1,18 @@
+% optimize 1 link swingup trajectory
+% optimize using both x[k] and u[k] as variables
+
+% to run program.
+1) start matlab
+
+2) type
+main
+
+FILES:
+main.m: main routine, calls fminxxx()
+criterion.m: optimization criterion
+constraints.m: constraints
+
+The swingup problem is to swing a pendulum from the downwards
+stable equilibrium up to the upwards unstable equilibrium, while
+minimizing a tradeoff of distance to the goal state and the size
+of the commands.

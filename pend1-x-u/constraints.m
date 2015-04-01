@@ -24,7 +24,8 @@ vmax = 10.0;
 % s.t. x_final: x[N] = goal;
 % s.t. v_init: v_offset[0] = 0;
 % s.t. v_final: v_offset[N-1] = 0;
-% s.t. v_max {i in 1..N-1}: v[i] <= vmax;
+% s.t. v_max {i in 1..N-1}: v[i] <= vmax;tce(idx)=a0(1);
+%s.t. x_final
 % s.t. v_min {i in 1..N-1}: v[i] >= vmin;
 
 i_a0 = 1;
@@ -36,15 +37,14 @@ u0=p(i_u0:i_u0+N-1);
 %s.t. newton
 idx=0;
 for i=1:N-1
- v0 = (a0(i+1+1)-a0(i-1+1))/(2*dt);
+%  v0 = (a0(i+1+1)-a0(i-1+1))/(2*dt);
  acc0 = (a0(i+1+1)-2*a0(i+1)+a0(i-1+1))/(dt^2);
  idx=idx+1;
  tce(idx)= u0(i) - mass*gravity*length*0.5*sin(a0(i+1))-moment_of_inertia_joint*acc0;
 end
 %s.t. x_init
 idx=idx+1;
-tce(idx)=a0(1);
-%s.t. x_final
+
 idx=idx+1;
 tce(idx)=a0(N+1)-goal;
 %s.t. v_init
@@ -71,4 +71,13 @@ ineq_violations=tc';
 end
 %% final end
 
+%{
+% 
+tce(idx)= u0(i) - 
 
+
+
+
+
+
+%}

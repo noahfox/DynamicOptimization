@@ -4,7 +4,7 @@
 global N;
 N = 100;
 % set options for fmincon()
-options = optimset('MaxFunEvals',1000000);
+options = optimset('MaxFunEvals',1000000,'Algorithm','sqp');
 
 % p0 is the intitial parameter vector
 goal = pi;

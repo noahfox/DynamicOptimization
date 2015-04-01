@@ -1,52 +1,62 @@
 function [ineq_violations,eq_violations] = constraint_fun(p)
-global N
+global N plan
 
-walk_plan = read_plan(1); % read walking plan from file
-P_x = walk_plan.p_x;
-P_y = walk_plan.p_y;
+walk_plan = read_plan(plan); % read walking plan from file
+p_x = walk_plan.p_x;
+p_y = walk_plan.p_y;
 stance = walk_plan.stance_type;
 step_dur = walk_plan.duration;
+time = walk_plan.time;
+
+vmin_x = -100;
 
 
 duration = sum(step_dur);
 dt = duration/N;
 z = 1; % set height to constant
-gravity = 9.81;
+G = 9.81;
+
+
+i_x0 = 1;
+i_y0 = i_x0 + N + 1;
+i_u_x0 = i_y0 + N + 1;
+i_u_y0 = i_u_x0 + N + 1;
+
+x=p(i_x0:i_x0+N);
+y=p(i_y0:i_y0+N);
+u_x=p(i_u_x0:i_u_x0+N);
+u_y=p(i_u_y0:i_u_y0+N);
+
 
 idx = 1;
+step = 1;
+count = 1;
 % dynamics
 for i = 1:N-1
-    ddx = (a0(i+1+1)-2*a0(i+1)+a0(i-1+1))/(dt^2);
-    tce(idx) = acc_x - (x - p_x + u_x) * G/z;
-    idx = idx + 1;
+    if dt*count > time(step)
+        step = step+1;
+    end
+    ddx = (x(i+1+1)-2*x(i+1)+x(i-1+1))/(dt^2);
+    eq_violations(idx) = ddx - (x(i) - p_x(step) + u_x(i)) * G/z;
+    idx = idx+1;
+    count = count+1;
 end
 
+step = 1;
+count = 1;
+for i = 1:N-1
+    if dt*count > time(step)
+        step = step+1;
+    end
+    ddy = (y(i+1+1)-2*y(i+1)+y(i-1+1))/(dt^2);
+    eq_violations(idx) = ddy - (y(i) - p_y(step) + u_y(i)) * G/z;
+    idx = idx+1;
+    count = count+1;
+end
 
-% STUFF FROM LAST TIME FOR REFERENCE
-
-%function [ineq_violations,eq_violations] = constraint_fun(joint_angles,robut_old)
-% global con_opts foot_pos p_d l_foot_ori r_foot_ori
-% % joint_angles
-% [robut,COM_X,COM_Y ] = Robut_Maker(robut_old,joint_angles);
-%
-% % FOOT POSITION
-% eq_violations(1) = foot_pos(1,1) - robut.j(11).position_w(1);
-% eq_violations(2) = foot_pos(1,2) - robut.j(11).position_w(2);
-% eq_violations(3) = foot_pos(1,3) - robut.j(11).position_w(3);
-% eq_violations(4) = foot_pos(2,1) - robut.j(17).position_w(1);
-% eq_violations(5) = foot_pos(2,2) - robut.j(17).position_w(2);
-% eq_violations(6) = foot_pos(2,3) - robut.j(17).position_w(3);
-%
-% % FOOT ORIENTATION
-% eq_violations(7) = norm(l_foot_ori - robut.j(11).rotation,2);
-% eq_violations(8) = norm(r_foot_ori - robut.j(17).rotation,2);
-%
-% % MUST GET TO TARGET
-% if con_opts(1) ~= 0
-%     eq_violations(9) = robut.j(29).position_w(1) - p_d(1);
-%     eq_violations(10) = robut.j(29).position_w(2) - p_d(2);
-%     eq_violations(11) = robut.j(29).position_w(3) - p_d(3);
-% end
-%
-% % STAY UP
-% ineq_violations = [abs(COM_X)-(0.302/2), abs(COM_Y)-(0.262/2)];
+% set other things maybe?
+idx = 1;
+for i=1:N-1
+    ineq_violations(idx)=-(x(i+1+1)-x(i-1+1))/(2*dt)+vmin_x;
+    idx=idx+1;
+end

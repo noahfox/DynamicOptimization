@@ -9,6 +9,7 @@ dt = duration/N;
 length = 1.0;
 width = 0.1;
 mass = 1.0;
+z = 1; % set height to constant
 moment_of_inertia_joint = mass*(length*length + width*width)/12 + mass*length*length/4;
 gravity = 9.81;
 goal = pi;
@@ -45,14 +46,19 @@ end
 %s.t. x_init
 idx=idx+1;
 
+% set final angle equal to goal
 idx=idx+1;
 tce(idx)=a0(N+1)-goal;
 %s.t. v_init
+% v0 = 0
 idx=idx+1;
 tce(idx)=a0(2)-a0(1);
 %s.t. v_final:
+% v_final = 0
 idx=idx+1;
 tce(idx)=a0(N+1)-a0(N);
+
+% max/min velocities
 %s.t. v_max    
 idx=0;
 for i=1:N-1
@@ -72,12 +78,9 @@ end
 %% final end
 
 %{
-% 
-tce(idx)= u0(i) - 
 
-
-
-
+ddx = (a0(i+1+1)-2*a0(i+1)+a0(i-1+1))/(dt^2)
+tce(idx) = acc_x - (x - p_x + u_x) * G/z;
 
 
 %}

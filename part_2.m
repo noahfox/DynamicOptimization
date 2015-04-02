@@ -16,8 +16,8 @@ walk_plan = read_plan(plan); % read walking plan from file
 % INITIALIZE OPTIMIZATION PARAMETERS
 % ----------------------------------------------------------------------- %
 % p0 is the intitial parameter vector
-x0 = rand(1,N+1); % COM X
-y0 = rand(1,N+1); % COM Y
+x0 = zeros(1,N+1); % COM X
+y0 = zeros(1,N+1); % COM Y
 u_x0 = zeros(1,N+1); % COP X
 u_y0 = zeros(1,N+1); % COP Y
 st = walk_plan.duration';

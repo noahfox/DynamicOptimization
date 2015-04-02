@@ -46,25 +46,25 @@ duration = sum(step_dur);
 dt = duration/N;
 
 step = 1;
-for i = 1:1:N-1
-    if dt*i >= time(step)
+for i = 1:1:N
+    if dt*i > time(step)
         step = step+1;
     end
-    p_traj_x(i) = p_x(step); % make trajectory of steps in x
-    p_traj_y(i) = p_y(step); % make trajectory of steps in y
+    p_traj_x(i+1) = p_x(step); % make trajectory of steps in x
+    p_traj_y(i+1) = p_y(step); % make trajectory of steps in y
 end
 
 fig(1) = figure();
 hold on
 plot(answer(i_x0:i_x0+N),'b','linewidth',2)
-plot(answer(i_u_x0:i_u_x0+N),'r','linewidth',2)
+plot(p_traj_x+answer(i_u_x0:i_u_x0+N),'r','linewidth',2)
 plot(p_traj_x,'c--','linewidth',2)
 title('COM Trajectory in X')
 
 fig(2) = figure();
 hold on
 plot(answer(i_y0:i_y0+N),'b','linewidth',2)
-plot(answer(i_u_y0:i_u_y0+N),'r--','linewidth',2)
+plot(p_traj_y+answer(i_u_y0:i_u_y0+N),'r--','linewidth',2)
 plot(p_traj_y,'c--','linewidth',2)
 title('COM Trajectory in Y')
 

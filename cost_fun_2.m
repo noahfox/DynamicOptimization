@@ -43,6 +43,8 @@ for i = 1:N-1
     score = score + (x(i) - p_x(step))^2 + xd^2 + 30*u_x(i)^2 + (y(i) - p_y(step))^2 + yd^2 + 30*u_y(i)^2;
     score = score + 5*(v_av-xd)^2;
 end
-score = score + 1*N*(max(step_dur)-mean(step_dur))^2 + 1*N*(min(step_dur)-mean(step_dur))^2;
+% score = score + 1*N*(max(step_dur)-mean(step_dur))^2 + 1*N*(min(step_dur)-mean(step_dur))^2;
+avstep_vec = ones(1,length(step_dur))*mean(step_dur)-step_dur;
+score = score + 1*N*(avstep_vec*avstep_vec');
 
 end

@@ -60,4 +60,5 @@ for i=1:N-1
     ineq_violations(idx)=-(x(i+1+1)-x(i-1+1))/(2*dt)+vmin_x; % bs stuff
     idx=idx+1;
 end
+
 end

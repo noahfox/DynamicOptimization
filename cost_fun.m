@@ -11,7 +11,7 @@ time = walk_plan.time;
 
 duration = sum(step_dur);
 dt = duration/N;
-goal = pi;
+
 
 i_x0 = 1;
 i_y0 = i_x0 + N + 1;
@@ -27,10 +27,11 @@ score = 0;
 
 step = 1;
 for i = 1:N-1
-    if dt*i > time(step)
+    if dt*i >= time(step)
         step = step+1;
     end
     xd = (x(i+1+1)-x(i))/(2*dt);
     yd = (y(i+1+1)-y(i))/(2*dt);
     score = score + (x(i) - p_x(step))^2 + xd^2 + 30*u_x(i)^2 + (y(i) - p_y(step))^2 + yd^2 + 30*u_y(i)^2;
+end
 end

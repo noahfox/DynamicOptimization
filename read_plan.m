@@ -10,3 +10,5 @@ Plan.stance_type = vals{:,4};
 for i = 1:1:length(Plan.duration)
 Plan.time(1,i) = sum(Plan.duration(1:i));
 end
+
+fclose(fid);

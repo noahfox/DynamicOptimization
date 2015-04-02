@@ -33,7 +33,7 @@ step = 1;
 count = 1;
 % dynamics
 for i = 1:N-1
-    if dt*count > time(step)
+    if dt*count >= time(step)
         step = step+1;
     end
     ddx = (x(i+1+1)-2*x(i+1)+x(i-1+1))/(dt^2);
@@ -45,7 +45,7 @@ end
 step = 1;
 count = 1;
 for i = 1:N-1
-    if dt*count > time(step)
+    if dt*count >= time(step)
         step = step+1;
     end
     ddy = (y(i+1+1)-2*y(i+1)+y(i-1+1))/(dt^2);
@@ -59,4 +59,5 @@ idx = 1;
 for i=1:N-1
     ineq_violations(idx)=-(x(i+1+1)-x(i-1+1))/(2*dt)+vmin_x;
     idx=idx+1;
+end
 end

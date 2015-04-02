@@ -1,0 +1,16 @@
+LOL NOTES
+weighting velocity average to 500 resulted in tight average velocity & wrecked COP
+Removed constraint on time => Led to negative times
+Fixed constraint on time to be positive => Initially a very slow first step, then much slower second step then very short 6 steps.
+Trying time penalized =>very fast steps and Cost = 686
+Without time penalized but having time constrained = > Cost = 185 (much better??? yet times were low enough in previous to have negligible effect on score and a time of 6 would only add 36 poitns leading to still less than 686 which is confusing)
+Enforcing Standard deviation => 220 but weird looking and ugly and took a really long time
+Replace STD with (min-mean) & (max-mean) => local minima with 110 but seemed pretty cool and regular step times only weight was 5 on v_av-xd
+" also aquired a 105 local min run from zero not random
+
+Pulled the things out of the for loop:
+initial score of 60 with a weird result applying weights
+added weight of 50 back to local minima around 105 and similar looking result
+adjusted weights to be dependent on N
+
+

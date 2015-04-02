@@ -38,17 +38,20 @@ i_x0 = 1;
 i_y0 = i_x0 + N + 1;
 i_u_x0 = i_y0 + N + 1;
 i_u_y0 = i_u_x0 + N + 1;
-i_st0 = i_u_y0 + 7;
+i_st0 = i_u_y0 + N + 1;
 
+x=answer(i_x0:i_x0+N);
+y=answer(i_y0:i_y0+N);
+u_x=answer(i_u_x0:i_u_x0+N);
+u_y=answer(i_u_y0:i_u_y0+N);
 st=answer(i_st0:i_st0+7);
-
 
 p_x = walk_plan.p_x; % x foot locations
 p_y = walk_plan.p_y; % y foot locations
 stance = walk_plan.stance_type;
 step_dur = walk_plan.duration;
 step_dur = st;
-time(1) = 0;
+time(1) = step_dur(1);
 for i = 2:1:length(step_dur)
     time(i) = time(i-1) + step_dur(i);
 end
@@ -62,6 +65,11 @@ for i = 1:1:N
     end
     p_traj_x(i+1) = p_x(step); % make trajectory of steps in x
     p_traj_y(i+1) = p_y(step); % make trajectory of steps in y
+end
+
+for i = 1:N-1
+    xd(i) = (x(i+1+1)-x(i))/(2*dt); % COM velocity in x
+    yd(i) = (y(i+1+1)-y(i))/(2*dt); % COM velocity in x
 end
 
 fig(1) = figure();
@@ -83,3 +91,16 @@ hold on
 plot(p_traj_x,p_traj_y,'r*')
 plot(answer(i_x0:i_x0+N),answer(i_y0:i_y0+N),'b','linewidth',2)
 title('XY COM Trajectory and Step Locations')
+
+fig(4) = figure();
+plot(xd,'g','linewidth',2)
+title('COM X Velocity')
+
+fig(5) = figure();
+plot(yd,'y','linewidth',2)
+title('COM Y Velocity')
+
+fig(6) = figure();
+subplot()
+plot(yd,'y','linewidth',2)
+title('COM Y Velocity')

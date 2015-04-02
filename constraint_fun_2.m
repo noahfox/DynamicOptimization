@@ -56,9 +56,6 @@ for i = 1:N-1
     count = count+1;
 end
 
-% eq_violations(idx) = duration - walk_plan.time(end);
-% idx = idx+1;
-
 
 % inequality constraints
 idx = 1;

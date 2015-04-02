@@ -41,7 +41,8 @@ for i = 1:N-1
     xd = (x(i+1+1)-x(i))/(2*dt); % COM velocity in x
     yd = (y(i+1+1)-y(i))/(2*dt); % COM velocity in y
     score = score + (x(i) - p_x(step))^2 + xd^2 + 30*u_x(i)^2 + (y(i) - p_y(step))^2 + yd^2 + 30*u_y(i)^2;
-    score = score + 5*(v_av-xd)^2 + 2*(max(step_dur)-mean(step_dur))^2 + 2*(min(step_dur)-mean(step_dur))^2;
+    score = score + 5*(v_av-xd)^2;
 end
+score = score + 0.5*N*(max(step_dur)-mean(step_dur))^2 + 0.5*N*(min(step_dur)-mean(step_dur))^2;
 
 end

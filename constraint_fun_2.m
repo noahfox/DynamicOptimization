@@ -60,7 +60,7 @@ end
 % inequality constraints
 idx = 1;
 for i=1:length(st)
-    ineq_violations(idx) = -st(i); % bogus
+    ineq_violations(idx) = -st(i);
     idx=idx+1;
 end
 

@@ -1,4 +1,4 @@
-function score = cost_fun_2(p)
+function score = cost_fun(p)
 
 global N plan
 

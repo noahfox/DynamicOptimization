@@ -1,4 +1,4 @@
-function [ineq_violations,eq_violations] = constraint_fun_2(p)
+function [ineq_violations,eq_violations] = constraint_fun_3(p)
 global N plan
 
 i_x0 = 1;

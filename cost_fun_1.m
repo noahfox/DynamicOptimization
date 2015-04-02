@@ -12,11 +12,11 @@ time = walk_plan.time;
 duration = sum(step_dur);
 dt = duration/N;
 
-
 i_x0 = 1;
 i_y0 = i_x0 + N + 1;
 i_u_x0 = i_y0 + N + 1;
 i_u_y0 = i_u_x0 + N + 1;
+
 
 x=p(i_x0:i_x0+N);
 y=p(i_y0:i_y0+N);
@@ -33,5 +33,7 @@ for i = 1:N-1
     xd = (x(i+1+1)-x(i))/(2*dt); % COM velocity in x
     yd = (y(i+1+1)-y(i))/(2*dt); % COM velocity in y
     score = score + (x(i) - p_x(step))^2 + xd^2 + 30*u_x(i)^2 + (y(i) - p_y(step))^2 + yd^2 + 30*u_y(i)^2;
+    
 end
+
 end

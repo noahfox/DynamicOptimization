@@ -1,14 +1,16 @@
-clear; close all; clc; echo on
+clear; close all; clc; echo off
 
 % ----------------------------------------------------------------------- %
 % SETUP
 % ----------------------------------------------------------------------- %
-global N plan section
+global N plan
 N = 100;
 plan = 1;
-section = 1;
+
 rng('shuffle','twister')
 options = optimset('MaxFunEvals',1000000,'Algorithm','sqp','Display','iter','TolFun',1e-3);
+
+walk_plan = read_plan(plan); % read walking plan from file
 
 % ----------------------------------------------------------------------- %
 % INITIALIZE OPTIMIZATION PARAMETERS
@@ -18,12 +20,13 @@ x0 = rand(1,N+1); % COM X
 y0 = rand(1,N+1); % COM Y
 u_x0 = zeros(1,N+1); % COP X
 u_y0 = zeros(1,N+1); % COP Y
-p0=[x0 y0 u_x0 u_y0]; % optimization vector
+st = walk_plan.duration';
+p0=[x0 y0 u_x0 u_y0 st]; % optimization vector
 
 % ----------------------------------------------------------------------- %
 % OPTIMIZE
 % ----------------------------------------------------------------------- %
-[answer,fval,exitflag]=fmincon(@cost_fun,p0,[],[],[],[],[],[],@constraint_fun,options);
+[answer,fval,exitflag]=fmincon(@cost_fun_2,p0,[],[],[],[],[],[],@constraint_fun_2,options);
 fval
 exitflag
 
@@ -35,14 +38,20 @@ i_x0 = 1;
 i_y0 = i_x0 + N + 1;
 i_u_x0 = i_y0 + N + 1;
 i_u_y0 = i_u_x0 + N + 1;
+i_st0 = i_u_y0 + 7;
+
+st=answer(i_st0:i_st0+7);
 
 
-walk_plan = read_plan(plan); % read walking plan from file
 p_x = walk_plan.p_x; % x foot locations
 p_y = walk_plan.p_y; % y foot locations
 stance = walk_plan.stance_type;
 step_dur = walk_plan.duration;
-time = walk_plan.time;
+step_dur = st;
+time(1) = 0;
+for i = 2:1:length(step_dur)
+    time(i) = time(i-1) + step_dur(i);
+end
 duration = sum(step_dur);
 dt = duration/N;
 
@@ -69,4 +78,8 @@ plot(p_traj_y+answer(i_u_y0:i_u_y0+N),'r--','linewidth',2)
 plot(p_traj_y,'c--','linewidth',2)
 title('COM Trajectory in Y')
 
-
+fig(3) = figure();
+hold on
+plot(p_traj_x,p_traj_y,'r*')
+plot(answer(i_x0:i_x0+N),answer(i_y0:i_y0+N),'b','linewidth',2)
+title('XY COM Trajectory and Step Locations')

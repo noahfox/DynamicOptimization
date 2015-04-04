@@ -39,3 +39,6 @@ Initially the optimization could not find a feasible solution which didn't make 
 We found that by changing the starting plan to all zeros and then also weighting the footstep location accuracy higher we could get it to find a feasible solution
 This solution still was not good as the y location started very high and did not decrease much over the course of the walk.
 Our first attempt at fixing this was to also constrain the y positions for the first and last steps.
+This led to an infeasible solution, on a hunch we tried removing the walk forward constraints.
+And then we added a penalty to the penalty on the average of y which would thus drive the average of y to zero.
+This was done so that the walker would generally walk straight instead of curving or leaning to the side.

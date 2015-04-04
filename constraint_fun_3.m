@@ -96,7 +96,7 @@ idx = idx+1;
 % idx = idx+1;
 % eq_violations(idx) = sly(end-1)-p_y_d(end-1);
 
-eq_violations(idx) = time(end) - 6;
+% eq_violations(idx) = time(end) - 6;
 
 % inequality constraints
 idx = 1;
@@ -107,6 +107,8 @@ end
 
 ineq_violations(idx) = p_x_d(end) - slx(end);
 idx=idx+1;
+
+ineq_violations(idx) = time(end) - walk_plan.time(end);
 
 % for i=1:length(slx)-1
 %     ineq_violations(idx) = slx(i)-slx(i+1);

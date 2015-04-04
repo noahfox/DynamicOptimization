@@ -3,9 +3,10 @@ clear; close all; clc; echo off
 % ----------------------------------------------------------------------- %
 % SETUP
 % ----------------------------------------------------------------------- %
-global N plan
+global N plan problem
 N = 100;
 plan = 1;
+problem = 3;
 
 rng('shuffle','twister')
 options = optimset('MaxFunEvals',1000000,'Algorithm','sqp','Display','iter','TolFun',1e-3,'MaxIter',750);

@@ -29,3 +29,13 @@ step_dur = [0.929700229640353	0.929700075091380	0.929700190449548	0.929700239631
 Increasing the weight to 1.2 had a cool effect. Drove cost very low (32.0818). Behavior is strange, seems to override average velocity objective. Very consistent step time.
 step_dur = [0.929700229640353	0.929700075091380	0.929700190449548	0.929700239631601	0.929700489722792	0.752966147551188	0.752966064046105	0.752966098234701]
 Weighting 1.005 seemed to result in behavior similar to 'normal'. 1.01 is awful. Left it as 1.
+
+Part 3
+We altered our functions so that the planned steps were now considered desired and their was a cost associated with not being at those locations.
+We then added new optimization variables for the footstep locations
+To constrain them we initially constrained a initial x and a last x as in the start and the ending positions.
+We then added a constraint that each x had to be larger then the last to prevent the it from walking backwards which we deemed incorrect
+Initially the optimization could not find a feasible solution which didn't make sense as all of our constraints would have been aceptable with the original plan which we also gave as our starting point.
+We found that by changing the starting plan to all zeros and then also weighting the footstep location accuracy higher we could get it to find a feasible solution
+This solution still was not good as the y location started very high and did not decrease much over the course of the walk.
+Our first attempt at fixing this was to also constrain the y positions for the first and last steps.

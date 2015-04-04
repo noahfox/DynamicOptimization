@@ -6,16 +6,22 @@ i_y0 = i_x0 + N + 1;
 i_u_x0 = i_y0 + N + 1;
 i_u_y0 = i_u_x0 + N + 1;
 i_st0 = i_u_y0 + N + 1;
+i_slx0 = i_st0 + 8;
+i_sly0 = i_slx0 + 8;
 
 x=p(i_x0:i_x0+N);
 y=p(i_y0:i_y0+N);
 u_x=p(i_u_x0:i_u_x0+N);
 u_y=p(i_u_y0:i_u_y0+N);
 st=p(i_st0:i_st0+7);
+slx=p(i_slx0:i_slx0+7);
+sly=p(i_sly0:i_sly0+7);
 
 walk_plan = read_plan(plan); % read walking plan from file
-p_x = walk_plan.p_x;
-p_y = walk_plan.p_y;
+p_x = slx;
+p_y = sly;
+p_x_d = walk_plan.p_x;
+p_y_d = walk_plan.p_y;
 stance = walk_plan.stance_type;
 step_dur = st;
 time(1) = step_dur(1);
@@ -55,7 +61,24 @@ for i = 1:N-1
     idx = idx+1;
     count = count+1;
 end
+eq_violations(idx) = slx(1);
+idx = idx+1;
+% eq_violations(idx) = slx(2);
+% idx = idx+1;
+% eq_violations(idx) = slx(end)-p_x_d(end);
+% idx = idx+1;
+% eq_violations(idx) = slx(end-1)-p_x_d(end-1);
+% idx = idx+1;
+% 
+eq_violations(idx) = sly(1);
+idx = idx+1;
+% eq_violations(idx) = sly(2);
+% idx = idx+1;
+% eq_violations(idx) = sly(end)-p_y_d(end);
+% idx = idx+1;
+% eq_violations(idx) = sly(end-1)-p_y_d(end-1);
 
+eq_violations(idx) = time(end) - 6;
 
 % inequality constraints
 idx = 1;
@@ -64,5 +87,7 @@ for i=1:length(st)
     idx=idx+1;
 end
 
-
-end
+% for i=1:length(slx)-1
+%     ineq_violations(idx) = slx(i)-slx(i+1);
+%     idx=idx+1;
+% end

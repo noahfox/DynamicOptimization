@@ -21,8 +21,8 @@ y0 = zeros(1,N+1); % COM Y
 u_x0 = zeros(1,N+1); % COP X
 u_y0 = zeros(1,N+1); % COP Y
 st0 = walk_plan.duration';
-% sl0 = zeros(1,16);
-sl0 = [walk_plan.p_x' walk_plan.p_y'];
+sl0 = 
+% sl0 = [walk_plan.p_x' walk_plan.p_y'];
 p0=[x0 y0 u_x0 u_y0 st0 sl0]; % optimization vector
 
 % ----------------------------------------------------------------------- %
@@ -41,8 +41,8 @@ i_y0 = i_x0 + N + 1;
 i_u_x0 = i_y0 + N + 1;
 i_u_y0 = i_u_x0 + N + 1;
 i_st0 = i_u_y0 + N + 1;
-i_slx0 = i_st0 + 8;
-i_sly0 = i_slx0 + 8;
+i_slx0 = i_st0 + 7;
+i_sly0 = i_slx0 + 7;
 
 x=answer(i_x0:i_x0+N);
 y=answer(i_y0:i_y0+N);
@@ -118,7 +118,7 @@ title('Uy')
 
 fig(7) = figure();
 hold on
-plot(p_x_d,p_y_d,'ro')
-plot(p_x,p_y,'b*')
+plot(p_x_d,p_y_d,'r0')
+plot(p_x_d,p_y_d,'b*')
 title('Footstep Locaitons')
 legend('Desired','Optimized','location','best')

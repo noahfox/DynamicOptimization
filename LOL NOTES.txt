@@ -42,3 +42,18 @@ Our first attempt at fixing this was to also constrain the y positions for the f
 This led to an infeasible solution, on a hunch we tried removing the walk forward constraints.
 And then we added a penalty to the penalty on the average of y which would thus drive the average of y to zero.
 This was done so that the walker would generally walk straight instead of curving or leaning to the side.
+
+We ran into significant trouble with glitches due to using indicies and them frequently getting confused and muddled.
+To fix this we made a parameter to structure function and then pulled out structure values in our constraint and cost functions.
+
+With the glitches working significantly better we were able to get significantly more reliable and intellignet results.
+We noticed that we were not travelling the full distance and felt that it was necessary for it to start at the start and end at least at the goal if not past.
+While we already had an equality constraint on first foot step we chose to add an inequality constraint on being past the last x value in the plan
+
+The optimization was full of local minimas, for instance lowering the weight on one score led to a 50% increase in final score for the new result.
+fmincon validated this by consistently giving us the error flag associated with a local minima and not a true solution.
+
+Originally we considered constraining step size to a reasonable value but we found that the penalty on not being at the desired locations led to that being somewhat constrained anyways.
+
+To better evaluate how our score function's weights effected our score we made a pie chart of score broken down by each term in our score function
+

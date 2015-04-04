@@ -56,4 +56,5 @@ fmincon validated this by consistently giving us the error flag associated with 
 Originally we considered constraining step size to a reasonable value but we found that the penalty on not being at the desired locations led to that being somewhat constrained anyways.
 
 To better evaluate how our score function's weights effected our score we made a pie chart of score broken down by each term in our score function
-
+We realized the pie chart was relative and would not function well but a bar graph did display both relative and absolute information.
+To adjust our weights we decided to first make all bars arpoximately equal and then changing them to increase weights on things we care about more.

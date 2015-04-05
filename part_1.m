@@ -7,7 +7,6 @@ global N plan section
 N = 100;
 plan = 1;
 section = 1;
-rng('shuffle','twister')
 options = optimset('MaxFunEvals',1000000,'Algorithm','sqp','Display','iter','TolFun',1e-3);
 
 % ----------------------------------------------------------------------- %
@@ -23,7 +22,7 @@ p0=[x0 y0 u_x0 u_y0]; % optimization vector
 % ----------------------------------------------------------------------- %
 % OPTIMIZE
 % ----------------------------------------------------------------------- %
-[answer,fval,exitflag]=fmincon(@cost_fun,p0,[],[],[],[],[],[],@constraint_fun,options);
+[answer,fval,exitflag]=fmincon(@cost_fun_1,p0,[],[],[],[],[],[],@constraint_fun_1,options);
 fval
 exitflag
 
@@ -36,7 +35,7 @@ i_y0 = i_x0 + N + 1;
 i_u_x0 = i_y0 + N + 1;
 i_u_y0 = i_u_x0 + N + 1;
 
-
+% process parameters
 walk_plan = read_plan(plan); % read walking plan from file
 p_x = walk_plan.p_x; % x foot locations
 p_y = walk_plan.p_y; % y foot locations
@@ -45,6 +44,15 @@ step_dur = walk_plan.duration;
 time = walk_plan.time;
 duration = sum(step_dur);
 dt = duration/N;
+
+% process solution into variables
+x=answer(i_x0:i_x0+N);
+y=answer(i_y0:i_y0+N);
+u_x=answer(i_u_x0:i_u_x0+N);
+u_y=answer(i_u_y0:i_u_y0+N);
+
+% calculate COM velocities
+[xd,yd] = datderiv(x,y,dt);
 
 step = 1;
 for i = 1:1:N
@@ -55,18 +63,42 @@ for i = 1:1:N
     p_traj_y(i+1) = p_y(step); % make trajectory of steps in y
 end
 
+% ----------------------------------------------------------------------- %
+% PLOT RESULTS
+% ----------------------------------------------------------------------- %
 fig(1) = figure();
 hold on
-plot(answer(i_x0:i_x0+N),'b','linewidth',2)
-plot(p_traj_x+answer(i_u_x0:i_u_x0+N),'r','linewidth',2)
+plot(x,'b','linewidth',2)
+plot(p_traj_x+u_x,'r','linewidth',2)
 plot(p_traj_x,'c--','linewidth',2)
 title('COM Trajectory in X')
 
 fig(2) = figure();
 hold on
-plot(answer(i_y0:i_y0+N),'b','linewidth',2)
-plot(p_traj_y+answer(i_u_y0:i_u_y0+N),'r--','linewidth',2)
+plot(y,'b','linewidth',2)
+plot(p_traj_y+u_y,'r--','linewidth',2)
 plot(p_traj_y,'c--','linewidth',2)
 title('COM Trajectory in Y')
 
+fig(3) = figure();
+hold on
+plot(x,y,'b','linewidth',2)
+plot(p_x,p_y,'r*')
+title('COM Trajectory with Foot Locations')
+legend('COM Trajectory', 'Foot Locations','location','best')
 
+fig(4) = figure();
+plot(xd,'g','linewidth',2)
+title('COM X Velocity')
+
+fig(5) = figure();
+plot(yd,'y','linewidth',2)
+title('COM Y Velocity')
+
+fig(6) = figure();
+subplot(2,1,1)
+plot(u_x,'b','linewidth',2)
+title('Ux')
+subplot(2,1,2)
+plot(u_y,'r','linewidth',2)
+title('Uy')

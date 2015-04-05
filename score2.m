@@ -1,7 +1,9 @@
 function [score, score_vec] = score2(p)
 global N plan
 
-% VARIABLES
+% ----------------------------------------------------------------------- %
+% READ AND PROCESS PARAMETERS
+% ----------------------------------------------------------------------- %
 walk_plan = read_plan(plan); % read walking plan from file
 R = treemaker(p);
 x = R.x;
@@ -19,13 +21,17 @@ p_traj_x = walk_plan.p_traj_x;
 p_traj_y = walk_plan.p_traj_y;
 
 
-% CALCULATIONS
+% ----------------------------------------------------------------------- %
+% CALCULATE COST PARAMETERS
+% ----------------------------------------------------------------------- %
 v_av = p_x(end)/duration; % average velocity
-[xd,yd] = datderiv(x,y,dt);
-avstep_vec = ones(1,length(step_dur))*mean(step_dur)-step_dur;
+[xd,yd] = datderiv(x,y,dt); % x and y velocities
+avstep_vec = ones(1,length(step_dur))*mean(step_dur)-step_dur; % average step vector
 
 
-% SCORE
+% ----------------------------------------------------------------------- %
+% CALCULATE SCORE
+% ----------------------------------------------------------------------- %
 s_original = 0;
 s_vav = 0;
 s_avstep = 0;

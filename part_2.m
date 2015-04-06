@@ -53,38 +53,38 @@ p_traj_y = walk_plan.p_traj_y; % y loaction of step for each sim time step
 % ----------------------------------------------------------------------- %
 fig(1) = figure();
 hold on
-plot(x,'b','linewidth',2)
-plot(p_traj_x+u_x,'r','linewidth',2)
-plot(p_traj_x,'c--','linewidth',2)
+plot(x,'linewidth',2)
+plot(p_traj_x+u_x,'linewidth',2)
+plot(p_traj_x,'--','linewidth',2)
 title('COM Trajectory in X')
 
 fig(2) = figure();
 hold on
-plot(y,'b','linewidth',2)
-plot(p_traj_y+u_y,'r--','linewidth',2)
-plot(p_traj_y,'c--','linewidth',2)
+plot(y,'linewidth',2)
+plot(p_traj_y+u_y,'--','linewidth',2)
+plot(p_traj_y,'--','linewidth',2)
 title('COM Trajectory in Y')
 
 fig(3) = figure();
 hold on
-plot(p_traj_x,p_traj_y,'r*')
-plot(x,y,'b','linewidth',2)
+plot(p_traj_x,p_traj_y,'*')
+plot(x,y,'linewidth',2)
 title('XY COM Trajectory and Step Locations')
 
 fig(4) = figure();
-plot(xd,'g','linewidth',2)
+plot(xd,'linewidth',2)
 title('COM X Velocity')
 
 fig(5) = figure();
-plot(yd,'y','linewidth',2)
+plot(yd,'linewidth',2)
 title('COM Y Velocity')
 
 fig(6) = figure();
 subplot(2,1,1)
-plot(u_x,'b','linewidth',2)
+plot(u_x,'linewidth',2)
 title('Ux')
 subplot(2,1,2)
-plot(u_y,'r','linewidth',2)
+plot(u_y,'linewidth',2)
 title('Uy')
 
 scorecheck(answer); % show score breakdown

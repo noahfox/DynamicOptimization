@@ -7,23 +7,12 @@ global N plan problem
 N = 100;
 plan = 1;
 problem = 2;
-
-rng('shuffle','twister')
 options = optimset('MaxFunEvals',1000000,'Algorithm','sqp','Display','iter','TolFun',1e-3);
-
 walk_plan = read_plan(plan); % read walking plan from file
 
 % ----------------------------------------------------------------------- %
 % INITIALIZE OPTIMIZATION PARAMETERS
 % ----------------------------------------------------------------------- %
-% p0 is the intitial parameter vector
-% % % x0 = zeros(1,N+1); % COM X
-% % % y0 = zeros(1,N+1); % COM Y
-% % % u_x0 = zeros(1,N+1); % COP X
-% % % u_y0 = zeros(1,N+1); % COP Y
-% % % st = walk_plan.duration';
-% % % p0=[x0 y0 u_x0 u_y0 st]; % optimization vector
-
 % p0 is the intitial parameter vector
 x0 = zeros(1,N); % COM X
 y0 = zeros(1,N); % COM Y
@@ -42,64 +31,26 @@ exitflag
 % ----------------------------------------------------------------------- %
 % PROCESS RESULTS
 % ----------------------------------------------------------------------- %
-% indecies for different parameter sets
-% % % i_x0 = 1;
-% % % i_y0 = i_x0 + N + 1;
-% % % i_u_x0 = i_y0 + N + 1;
-% % % i_u_y0 = i_u_x0 + N + 1;
-% % % i_st0 = i_u_y0 + N + 1;
-% % % 
-% % % x=answer(i_x0:i_x0+N);
-% % % y=answer(i_y0:i_y0+N);
-% % % u_x=answer(i_u_x0:i_u_x0+N);
-% % % u_y=answer(i_u_y0:i_u_y0+N);
-% % % st=answer(i_st0:i_st0+7);
-% % % 
-% % % p_x = walk_plan.p_x; % x foot locations
-% % % p_y = walk_plan.p_y; % y foot locations
-% % % stance = walk_plan.stance_type;
-% % % step_dur = walk_plan.duration;
-% % % step_dur = st;
-% % % time(1) = step_dur(1);
-% % % for i = 2:1:length(step_dur)
-% % %     time(i) = time(i-1) + step_dur(i);
-% % % end
-% % % duration = sum(step_dur);
-% % % dt = duration/N;
-
-
-% % % step = 1;
-% % % for i = 1:1:N
-% % %     if dt*i > time(step)
-% % %         step = step+1;
-% % %     end
-% % %     p_traj_x(i+1) = p_x(step); % make trajectory of steps in x
-% % %     p_traj_y(i+1) = p_y(step); % make trajectory of steps in y
-% % % end
-
-% % % for i = 1:N-1
-% % %     xd(i) = (x(i+1+1)-x(i))/(2*dt); % COM velocity in x
-% % %     yd(i) = (y(i+1+1)-y(i))/(2*dt); % COM velocity in x
-% % % end
-
 R = treemaker(answer);
 x = R.x;
 y = R.y;
 u_x = R.u_x;
 u_y = R.u_y;
-st = R.st;
+st = R.st; % step durations
 p_x = walk_plan.p_x; % x desired foot locations
 p_y = walk_plan.p_y; % y desired foot locations
-% stance = walk_plan.stance_type;
-step_dur = R.st;
-time = R.time;
-duration = R.duration;
-dt = R.dt;
-p_traj_x = walk_plan.p_traj_x;
-p_traj_y = walk_plan.p_traj_y;
+step_dur = R.st; % step durations
+time = R.time; % step occurance times
+duration = R.duration; % sim duration
+dt = R.dt; % time step
+p_traj_x = walk_plan.p_traj_x; % x loaction of step for each sim time step
+p_traj_y = walk_plan.p_traj_y; % y loaction of step for each sim time step
 
-[xd,yd] = datderiv(x,y,dt);
+[xd,yd] = datderiv(x,y,dt); % x and y COM velocities
 
+% ----------------------------------------------------------------------- %
+% PLOT RESULTS
+% ----------------------------------------------------------------------- %
 fig(1) = figure();
 hold on
 plot(x,'b','linewidth',2)
@@ -136,4 +87,5 @@ subplot(2,1,2)
 plot(u_y,'r','linewidth',2)
 title('Uy')
 
-scorecheck(answer);
+scorecheck(answer); % show score breakdown
+make_figs(fig); % print figures to files

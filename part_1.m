@@ -3,10 +3,11 @@ clear; close all; clc; echo on
 % ----------------------------------------------------------------------- %
 % SETUP
 % ----------------------------------------------------------------------- %
-global N plan section
+global N plan problem
 N = 100;
 plan = 1;
-section = 1;
+problem = 1;
+
 options = optimset('MaxFunEvals',1000000,'Algorithm','sqp','Display','iter','TolFun',1e-3);
 
 % ----------------------------------------------------------------------- %
@@ -102,3 +103,5 @@ title('Ux')
 subplot(2,1,2)
 plot(u_y,'r','linewidth',2)
 title('Uy')
+
+make_figs(fig); % print figures to files

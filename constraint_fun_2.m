@@ -1,6 +1,9 @@
 function [ineq_violations,eq_violations] = constraint_fun_2(p)
 global N plan
 
+% ----------------------------------------------------------------------- %
+% SETUP
+% ----------------------------------------------------------------------- %
 walk_plan = read_plan(plan); % read walking plan from file
 R = treemaker(p);
 x = R.x;
@@ -19,8 +22,9 @@ p_traj_y = walk_plan.p_traj_y;
 z = 1; % set height to constant
 G = 9.81; % gravity
 
-
-% equality constraints
+% ----------------------------------------------------------------------- %
+% EQUALITY CONSTRAINTS
+% ----------------------------------------------------------------------- %
 idx = 1; % equality constraint index
 % dynamics
 for i = 1:length(x)-2
@@ -35,13 +39,12 @@ for i = 1:length(y)-2
     idx = idx+1;
 end
 
-
-% inequality constraints
-idx = 1;
+% ----------------------------------------------------------------------- %
+% INEQUALITY CONSTRAINTS
+% ----------------------------------------------------------------------- %idx = 1;
 for i=1:length(st)
-    ineq_violations(idx) = -st(i);
+    ineq_violations(idx) = -st(i); % step times must be > 0
     idx=idx+1;
 end
-
-ineq_violations(idx) = time(end) - walk_plan.time(end);
+ineq_violations(idx) = time(end) - walk_plan.time(end); % duration must be at least as long as given in the plan file
 end

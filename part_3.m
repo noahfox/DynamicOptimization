@@ -7,8 +7,6 @@ global N plan problem
 N = 100;
 plan = 1;
 problem = 3;
-
-rng('shuffle','twister')
 options = optimset('MaxFunEvals',1000000,'Algorithm','sqp','Display','iter','TolFun',1e-3,'MaxIter',750);
 
 % ----------------------------------------------------------------------- %
@@ -35,7 +33,6 @@ exitflag
 % ----------------------------------------------------------------------- %
 R = treemaker(answer);
 walk_plan = read_plan(plan); % read walking plan from file
-
 x = R.x;
 y = R.y;
 u_x = R.u_x;
@@ -52,9 +49,11 @@ dt = R.dt;
 p_traj_x = R.p_traj_x;
 p_traj_y = R.p_traj_y;
 
-
 [xd,yd] = datderiv(x,y,dt);
 
+% ----------------------------------------------------------------------- %
+% PLOT RESULTS
+% ----------------------------------------------------------------------- %
 fig(1) = figure();
 hold on
 plot(x,'b','linewidth',2)
@@ -98,4 +97,5 @@ plot(p_x,p_y,'b*')
 title('Footstep Locaitons')
 legend('Desired','Optimized','location','best')
 
-scorecheck(answer);
+scorecheck(answer); % show score breakdown
+make_figs(fig); % print figures to files

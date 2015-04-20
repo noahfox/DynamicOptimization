@@ -2346,8 +2346,9 @@ manual_mode = 0;
 
 function J = costfun(x)
 % run score function here
-u(1) = x(1:)
-J = sim_rocket(x);
+u_vec{1} = x(1:length(x)/2);
+u_vec{2} = x((length(x)/2)+1:end);
+J = 1e3 - sim_rocket(u_vec);
 
 
 function f=fjens1(x)

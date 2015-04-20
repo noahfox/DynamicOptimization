@@ -4,7 +4,7 @@
 %   consts - structure that contains various system constants
 % Output parameters
 %   ctrl  -  any student defined control parameters
-function ctrl = student_setup(x0, consts)
+function ctrl = student_setup(x0, consts, K)
     % Replace line below with one time computation if needed.
     % Ex: ctrl.K = lqr(A, B, Q, R) ;
     ctrl = [] ;

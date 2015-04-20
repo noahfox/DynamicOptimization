@@ -40,7 +40,7 @@ for j=1:length(t)
     [dx uu] = odefun_rocket(t, x(j,:)', consts, ctrl, u_vec) ;
     u(j,:) = uu' ;
 end
-% animate_rocket(t, x, u) ;
+animate_rocket(t, x, u) ;
 end
 
 

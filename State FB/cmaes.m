@@ -2347,7 +2347,7 @@ manual_mode = 0;
 function score = costfun(x)
 % run score function here
 [J state] = sim_rocket(x);
-score = 100 - J;
+score = (1/J)^2;
 if any(abs(state(:,3))) > pi/2 || any(abs(state(:,4))) > pi/2
     score = inf;
 end

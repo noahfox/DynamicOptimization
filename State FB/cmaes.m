@@ -2344,11 +2344,13 @@ manual_mode = 0;
 
 %%% Unimodal functions
 
-function J = costfun(x)
+function score = costfun(x)
 % run score function here
-u_vec{1} = x(1:length(x)/2);
-u_vec{2} = x((length(x)/2)+1:end);
-J = 1e3 - sim_rocket(u_vec);
+[J state] = sim_rocket(x);
+score = 100 - J;
+if any(abs(state(:,3))) > pi/2 || any(abs(state(:,4))) > pi/2
+    score = inf;
+end
 
 
 function f=fjens1(x)

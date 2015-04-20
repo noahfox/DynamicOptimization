@@ -11,6 +11,5 @@ function u = student_controller(t, x, consts, ctrl, p)
     p = p';
     K(1,:) = p(1:9);
     K(2,:) = p(10:18);
-    K
     u = -K*x ;
 end

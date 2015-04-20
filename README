@@ -1,0 +1,8 @@
+State FB: Optimizes K matrix to try and get a good state feedback law
+Control Traj: Optimizes a trajectory of n control inputs, which are interpolated to give control input at each time step
+
+To Do:
+Start both optimizations brim LQR maybe?
+Find some better starting point
+PID optimization
+Other controller optimization

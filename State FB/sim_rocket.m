@@ -41,7 +41,7 @@ function [J x] = sim_rocket(K, x0)
         [dx uu] = odefun_rocket(t, x(j,:)', consts, ctrl, K) ;
         u(j,:) = uu' ;
     end
-%      animate_rocket(t, x, u) ;
+     animate_rocket(t, x, u) ;
 end
 
 

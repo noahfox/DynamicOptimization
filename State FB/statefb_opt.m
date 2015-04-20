@@ -9,12 +9,11 @@ if use_cmaes
     opts.CMA.active = 1;
     opts.Restarts = 5;
     opts.LogPlot = 'on';
-    opts.LBounds = 0;
     opts = cmaes('defaults', opts);
     
     sigma = .1;
  
-    % x0 = rand(18,1)*.1;
+    x0 = rand(18,1)*10;
     % x0 = zeros(18,1);
     
     [XMIN,FMIN,COUNTEVAL,STOPFLAG,OUT,BESTEVER] = cmaes('costfun',x0,sigma,opts);

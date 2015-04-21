@@ -10,5 +10,5 @@ function u = student_controller(t, x, consts, ctrl)
     % Replace line below with your controller
     % Ex: u = -ctrl.K*x ;
     global target
-    u = -ctrl.K*(x-target');
+    u = -ctrl.K*(x);
 end

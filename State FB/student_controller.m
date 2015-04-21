@@ -8,8 +8,6 @@
 %   u  -  [thrust; torque] - two inputs to the rocket
 function u = student_controller(t, x, consts, ctrl, p)
     % Replace line below with your controller
-    p = p';
-    K(1,:) = p(1:9);
-    K(2,:) = p(10:18);
+    K = reshape(p,2,9);
     u = -K*x ;
 end

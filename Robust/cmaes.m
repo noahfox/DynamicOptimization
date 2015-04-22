@@ -2379,11 +2379,33 @@ global best_yet initials
 % run score function here
 k = lqrmaker(x);
 J = 0;
+numnz = 0;
 for i = 1:1:length(initials(:,1))
     [tempJ state] = sim_rocket(k,initials(i,:));
     J = J + tempJ;
+    if tempJ ~= 0
+        numnz = numnz+1;
+    end
 end
 J = J/length(initials(:,1));
+score = (1/J)^2;
+if J > best_yet
+    best_yet = J;
+    fprintf('Score: %g     Successful: %i/%i\n',J,numnz,length(initials));
+    K = k;
+    save('best_K.mat','K','x')
+end
+
+function score = randrobustqr(x)
+global best_yet runs
+% run score function here
+k = lqrmaker(x);
+J = 0;
+for i = 1:1:runs
+    [tempJ state] = sim_rocket(k,gen_ic());
+    J = J + tempJ;
+end
+J = J/runs;
 score = (1/J)^2;
 if J > best_yet
     best_yet = J;

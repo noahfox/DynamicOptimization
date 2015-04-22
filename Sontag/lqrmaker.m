@@ -51,7 +51,7 @@ Control = ctrb(A,B);
 Q = diag(abs(qr(1:9)));
 R = diag(abs(qr(10:11)));
 [K,P] = lqr(A,B,Q,R);
-% P = lyap(A,-Q);
+% P2 = lyap(A',Q)
 % K = 0;
 end
 

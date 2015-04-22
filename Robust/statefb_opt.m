@@ -1,19 +1,24 @@
 function statefb_opt()
 clear *; close all; clc
 
-global best_yet initials
+global best_yet initials runs
 best_yet = 0;
 consts = get_consts();
-initials = [10 150 0 0 0 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            20 150 0 0 0 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            -20 150 0 0 0 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            10 150 .25 0 0 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            10 150 .5 0 0 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            10 150 0 0 3 3 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            10 150 0 0 10 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            10 150 0 0 0 0 2 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            10 600 0 0 0 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel;
-            10 500 0 0 10 0 0 0 consts.m_nofuel+0.7*consts.max.m_fuel];
+
+% States: x=[y,z,th,psi,dy,dz,dth,dpsi,m]'
+fuel = consts.m_nofuel+0.7*consts.max.m_fuel;
+initials = [10 150 0 0 0 0 0 0 fuel;
+           -20 150 0 0 0 0 0 0 fuel;
+            30 150 .2 0 0 0 0 0 fuel;
+           -60 150 0 0 0 0 0 0 fuel;
+            30 150 .7 0 0 0 0 0 fuel;
+            20 150 .5 0 10 0 0 0 fuel;
+            30 150 .5 0 0 0 .3 0 fuel;
+            20 150 .2 0 5 0 .1 0 fuel;
+            50 150 .3 0 4 0 .1 0 fuel;
+           -30 150 .5 0 4 0 .2 0 fuel];
+
+% runs = 30;
             
 use_cmaes = 1;
 

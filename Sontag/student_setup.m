@@ -6,7 +6,7 @@
 %   ctrl  -  anx1 student defined control parax9eters
 function ctrl = student_setup(x0, consts)
 qr = [0.2435 0.0280 0.8191 0.4199 9.4800 10.2472 9.4862 9.5550 1.8240 0.7029 1.5921];
-[~,P] = lqrmaker(qr);
+[K,P] = lqrmaker(qr);
 syms x1 x2 x3 x4 x5 x6 x7 x8 x9 real
 
 f_vec = [   x5
@@ -35,4 +35,5 @@ LfV(x1,x2,x3,x4,x5,x6,x7,x8,x9) = jacobian(V,x)*f_vec;
 LgV(x1,x2,x3,x4,x5,x6,x7,x8,x9) = jacobian(V,x)*g_vec;
 ctrl.LfVfun = matlabFunction(LfV);
 ctrl.LgVfun = matlabFunction(LgV);
+ctrl.K = K;
 end

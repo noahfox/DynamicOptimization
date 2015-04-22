@@ -2352,30 +2352,10 @@ score = (1/J)^2;
 if J > best_yet
     best_yet = J;
     disp(J);
-    K = x;
-    save('best_K.mat','K')
+    e_vals = x;
+    save('best_eigs.mat','e_vals')
 end
 
-function score = robustcost(x)
-global best_yet initials
-% run score function here
-J = 0;
-numnz = 0;
-for i = 1:1:length(initials(:,1))
-    [tempJ state] = sim_rocket(x,initials(i,:));
-    J = J + tempJ;
-    if tempJ ~= 0
-        numnz = numnz+1;
-    end
-end
-J = J/length(initials(:,1));
-score = (1/J)^2;
-if J > best_yet
-    best_yet = J;
-    fprintf('Score: %g     Successful: %i/%i\n',J,numnz,length(initials));
-    K = x;
-    save('best_K.mat','K')
-end
 
 function f=fjens1(x)
 %

@@ -1,6 +1,12 @@
-function [K,P] = lqrmaker(qr)
-consts = get_consts();
-global target
+% Function to setup and perform any one-time computations
+% Input parameters
+%   x - state of the rocket, x=[y,z,th,psi,dy,dz,dth,dpsi,m]^T
+%   consts - structure that contains various system constants
+% Output parameters
+%   ctrl  -  any student defined control parameters
+function ctrl = student_setup(x0, consts, e_vals)
+% Replace line below with one time computation if needed.
+% Ex: ctrl.K = lqr(A, B, Q, R) ;
 syms y z th ps dy dz dth dpsi m ft T real
 
 f_vec = [   dy
@@ -30,11 +36,9 @@ sys = f_vec + g_vec*u;
 
 % consts.m_nofuel
 % consts.max.m_fuel
-% 1.4715
 
-ft_0 = (consts.m_nofuel*consts.g)/consts.gamma;
+ft_0 = (consts.max.m_fuel*consts.g)/consts.gamma;
 
-target = [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel];
 eq = [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel 1.4715 0];
 eq_vars = [y z th ps dy dz dth dpsi m ft T];
 
@@ -44,16 +48,5 @@ B_sym = jacobian(sys,u);
 A = eval(subs(A_sym,eq_vars,eq));
 B = eval(subs(B_sym,eq_vars,eq));
 
-Control = ctrb(A,B);
-% fprintf('Rank = %g\n',rank(Control));
-% 
-% Q = diag([1 1 1 1 10 10 10 10 1]);
-% R = diag([.01 .1]);
-Q = diag(abs(qr(1:9)));
-R = diag(abs(qr(10:11)));
-[K,P] = lqr(A,B,Q,R);
-
-% P2 = lyap(A,Q)
-% K = 0;
+ctrl.K = place(A,B,e_vals);
 end
-

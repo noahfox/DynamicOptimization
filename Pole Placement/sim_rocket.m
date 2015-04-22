@@ -1,10 +1,10 @@
-function sim_rocket(x0)
-    close all ; clc ;
+function [J x] = sim_rocket(e_vals, x0)
+    close all ;
 
     % load constant parameters
     consts = get_consts() ;
     
-    if(nargin < 1)
+    if(nargin < 2)
         x0 = [10; 150; 0; 0;
           0; 0; 0; 0;
           consts.m_nofuel+0.7*consts.max.m_fuel] ;
@@ -12,39 +12,40 @@ function sim_rocket(x0)
     
 
     % call student one-time setup
-    ctrl = student_setup(x0,consts) ;
+    ctrl = student_setup(x0, consts, e_vals) ;
+%         ctrl = 0;
 
       
     % Integrate system
     odeopts = odeset('Events',@odeevents_touchdown) ;
-    [t x] = ode23(@odefun_rocket, [0 60], x0, odeopts, consts, ctrl) ;
+    [t x] = ode45(@odefun_rocket, [0 60], x0, odeopts, consts, ctrl, e_vals) ;
 
     
     % Display Helpful information after simulation
-    disp(['Touchdown Time: ' num2str(t(end))]) ;
-    disp(['Touchdown Configuration: y=' num2str(x(end,1)) ' z=' num2str(x(end,2)) ' theta(deg)=' num2str(x(end,3)*180/pi) ' psi(deg)=' num2str(x(end,4)*180/pi)]) ;
-    disp(['Touchdown Velocity: y=' num2str(x(end,5)) ' z=' num2str(x(end,6)) ' theta(deg/s)=' num2str(x(end,7)*180/pi) ' psi(deg/s)=' num2str(x(end,8)*180/pi)]) ;
+%     disp(['Touchdown Time: ' num2str(t(end))]) ;
+%     disp(['Touchdown Configuration: y=' num2str(x(end,1)) ' z=' num2str(x(end,2)) ' theta(deg)=' num2str(x(end,3)*180/pi) ' psi(deg)=' num2str(x(end,4)*180/pi)]) ;
+%     disp(['Touchdown Velocity: y=' num2str(x(end,5)) ' z=' num2str(x(end,6)) ' theta(deg/s)=' num2str(x(end,7)*180/pi) ' psi(deg/s)=' num2str(x(end,8)*180/pi)]) ;
     
     J = compute_score(x(end,:)', consts) ;
-    disp(['Score: ' num2str(J)]) ;
+%     disp(['Score: ' num2str(J)]) ;
     
     % Plots
-    figure ; plot(t, x(:,1)) ; grid on ; xlabel('Time (s)') ; ylabel('y (m)') ;
-    figure ; plot(t, x(:,2)) ; grid on ; xlabel('Time (s)') ; ylabel('z (m)') ;
-    figure ; plot(t, x(:,3)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('theta (deg)') ;
-    figure ; plot(t, x(:,4)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('psi (deg)') ;
+%     figure ; plot(t, x(:,1)) ; grid on ; xlabel('Time (s)') ; ylabel('y (m)') ;
+%     figure ; plot(t, x(:,2)) ; grid on ; xlabel('Time (s)') ; ylabel('z (m)') ;
+%     figure ; plot(t, x(:,3)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('theta (deg)') ;
+%     figure ; plot(t, x(:,4)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('psi (deg)') ;
     
     % Animation
     u = zeros(length(t), 2) ;
     for j=1:length(t)
-        [dx uu] = odefun_rocket(t, x(j,:)', consts, ctrl) ;
+        [dx uu] = odefun_rocket(t, x(j,:)', consts, ctrl, e_vals) ;
         u(j,:) = uu' ;
     end
-    animate_rocket(t, x, u) ;
+%       animate_rocket(t, x, u) ;
 end
 
 
-function [dx u] = odefun_rocket(t, x, consts, ctrl)
+function [dx u] = odefun_rocket(t, x, consts, ctrl, K)
     y = x(1) ;
     z = x(2) ;
     th = x(3) ; 
@@ -93,7 +94,7 @@ function [dx u] = odefun_rocket(t, x, consts, ctrl)
 end
 
 % Exit integration on contact
-function [value,isterminal,direction] = odeevents_touchdown(t, x, consts, ctrl)
+function [value,isterminal,direction] = odeevents_touchdown(t, x, consts, ctrl, K)
     z = x(2) ; th = x(3) ; L = consts.L ; r = consts.r ;
     % Make a list of possible contact points
     contact_points = [z-L*cos(th)-r*sin(th);

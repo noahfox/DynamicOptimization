@@ -1,4 +1,4 @@
-function [K,P] = lqrmaker(qr)
+function K = lqrmaker()
 consts = get_consts();
 global target
 syms y z th ps dy dz dth dpsi m ft T real
@@ -30,9 +30,8 @@ sys = f_vec + g_vec*u;
 
 % consts.m_nofuel
 % consts.max.m_fuel
-% 1.4715
 
-ft_0 = (consts.m_nofuel*consts.g)/consts.gamma;
+ft_0 = (consts.max.m_fuel*consts.g)/consts.gamma;
 
 target = [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel];
 eq = [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel 1.4715 0];
@@ -46,14 +45,11 @@ B = eval(subs(B_sym,eq_vars,eq));
 
 Control = ctrb(A,B);
 % fprintf('Rank = %g\n',rank(Control));
-% 
-% Q = diag([1 1 1 1 10 10 10 10 1]);
-% R = diag([.01 .1]);
-Q = diag(abs(qr(1:9)));
-R = diag(abs(qr(10:11)));
-[K,P] = lqr(A,B,Q,R);
 
-% P2 = lyap(A,Q)
-% K = 0;
+Q = diag([1 1 1 1 10 10 10 10 1]);
+R = diag([.01 .1]);
+
+K = lqr(A,B,Q,R);
+
 end
 

@@ -1,4 +1,4 @@
-function sim_rocket(x0)
+function J = sim_rocket(x0)
     close all ;
 
     % load constant parameters
@@ -21,18 +21,18 @@ function sim_rocket(x0)
 
     
     % Display Helpful information after simulation
-    disp(['Touchdown Time: ' num2str(t(end))]) ;
-    disp(['Touchdown Configuration: y=' num2str(x(end,1)) ' z=' num2str(x(end,2)) ' theta(deg)=' num2str(x(end,3)*180/pi) ' psi(deg)=' num2str(x(end,4)*180/pi)]) ;
-    disp(['Touchdown Velocity: y=' num2str(x(end,5)) ' z=' num2str(x(end,6)) ' theta(deg/s)=' num2str(x(end,7)*180/pi) ' psi(deg/s)=' num2str(x(end,8)*180/pi)]) ;
+%     disp(['Touchdown Time: ' num2str(t(end))]) ;
+%     disp(['Touchdown Configuration: y=' num2str(x(end,1)) ' z=' num2str(x(end,2)) ' theta(deg)=' num2str(x(end,3)*180/pi) ' psi(deg)=' num2str(x(end,4)*180/pi)]) ;
+%     disp(['Touchdown Velocity: y=' num2str(x(end,5)) ' z=' num2str(x(end,6)) ' theta(deg/s)=' num2str(x(end,7)*180/pi) ' psi(deg/s)=' num2str(x(end,8)*180/pi)]) ;
     
     J = compute_score(x(end,:)', consts) ;
-    disp(['Score: ' num2str(J)]) ;
+%     disp(['Score: ' num2str(J)]) ;
     
     % Plots
-    figure ; plot(t, x(:,1)) ; grid on ; xlabel('Time (s)') ; ylabel('y (m)') ;
-    figure ; plot(t, x(:,2)) ; grid on ; xlabel('Time (s)') ; ylabel('z (m)') ;
-    figure ; plot(t, x(:,3)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('theta (deg)') ;
-    figure ; plot(t, x(:,4)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('psi (deg)') ;
+%     figure ; plot(t, x(:,1)) ; grid on ; xlabel('Time (s)') ; ylabel('y (m)') ;
+%     figure ; plot(t, x(:,2)) ; grid on ; xlabel('Time (s)') ; ylabel('z (m)') ;
+%     figure ; plot(t, x(:,3)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('theta (deg)') ;
+%     figure ; plot(t, x(:,4)*180/pi) ; grid on ; xlabel('Time (s)') ; ylabel('psi (deg)') ;
     
     % Animation
     u = zeros(length(t), 2) ;
@@ -40,7 +40,7 @@ function sim_rocket(x0)
         [dx uu] = odefun_rocket(t, x(j,:)', consts, ctrl) ;
         u(j,:) = uu' ;
     end
-    animate_rocket(t, x, u) ;
+%     animate_rocket(t, x, u) ;
 end
 
 

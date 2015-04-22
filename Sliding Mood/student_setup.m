@@ -7,6 +7,7 @@
 function ctrl = student_setup(x0, consts)
     % Replace line below with one time computation if needed.
     % Ex: ctrl.K = lqr(A, B, Q, R) ;
-    ctrl.surf = [1 1 1 1 1 1 1 1 1]'*2;
-    ctrl.beta0 = 3;
+    global surf beta0
+    ctrl.surf = surf;
+    ctrl.beta0 = beta0;
 end

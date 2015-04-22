@@ -31,7 +31,6 @@ g_vec = [0,    0 ;
 
 x = [x1 x2 x3 x4 x5 x6 x7 x8 x9]';
 V = x'*P*x;
-% V = (x'*x);
 LfV(x1,x2,x3,x4,x5,x6,x7,x8,x9) = jacobian(V,x)*f_vec;
 LgV(x1,x2,x3,x4,x5,x6,x7,x8,x9) = jacobian(V,x)*g_vec;
 ctrl.LfVfun = matlabFunction(LfV);

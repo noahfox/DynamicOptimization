@@ -30,11 +30,12 @@ sys = f_vec + g_vec*u;
 
 % consts.m_nofuel
 % consts.max.m_fuel
+% 1.4715
 
-ft_0 = (consts.max.m_fuel*consts.g)/consts.gamma;
+ft_0 = (consts.m_nofuel*consts.g)/consts.gamma;
 
 target = [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel];
-eq = [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel 1.4715 0];
+eq = [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel 0.2453 0];
 eq_vars = [y z th ps dy dz dth dpsi m ft T];
 
 A_sym = jacobian(sys,x);

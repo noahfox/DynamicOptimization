@@ -9,6 +9,7 @@
 function u = student_controller(t, x, consts, ctrl)
     % Replace line below with your controller
     % Ex: u = -ctrl.K*x ;
+    x = x - [0 consts.L 0 0 0 0 0 0 consts.max.m_fuel]';
     s = sum(ctrl.surf .* x);
     y = x(1) ;
     z = x(2) ;

@@ -15,18 +15,14 @@ function u = student_controller(t, x, consts, ctrl)
 
 LfV = ctrl.LfVfun(x(1),x(2),x(3),x(4),x(5),x(6),x(7),x(8),x(9));
 LgV = ctrl.LgVfun(x(1),x(2),x(3),x(4),x(5),x(6),x(7),x(8),x(9));
-
-if LgV(1) ~= 0
-    u(1) = -(LfV + sqrt(LfV^2 + LgV(1)^4))/LgV(1);
+a = LfV;
+b = LgV*LgV';
+if LgV ~= 0
+    u = -[(a+(a^2+b^4)^.5)/b]*LgV';
 else
-    u(1) = 0;
+    u = 0;
 end
 
-if LgV(2) ~= 0
-    u(2) = -(LfV + sqrt(LfV^2 + LgV(2)^4))/LgV(2);
-else
-    u(2) = 0;
-end
 
-u = u';
+% u = u';
 end

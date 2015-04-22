@@ -17,7 +17,7 @@ function sim_rocket(x0)
       
     % Integrate system
     odeopts = odeset('Events',@odeevents_touchdown) ;
-    [t x] = ode45(@odefun_rocket, [0 10], x0, odeopts, consts, ctrl) ;
+    [t x] = ode45(@odefun_rocket, [0 5], x0, odeopts, consts, ctrl) ;
 
     
     % Display Helpful information after simulation
